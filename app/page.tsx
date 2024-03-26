@@ -2,6 +2,8 @@
 
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 
+import { Button } from '@/components/ui/button';
+
 import axios from 'axios';
 
 export default function Home() {
@@ -12,7 +14,7 @@ export default function Home() {
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> =  (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     axios
       .post('/api/test', data)
       .then((cb) => console.log(cb))
@@ -37,7 +39,9 @@ export default function Home() {
           className="border border-black"
           {...register('content')}
         />
-        <button type="submit">Отправить</button>
+        <Button variant="default" size="default" type="submit">
+          Отправить
+        </Button>
       </form>
     </main>
   );
