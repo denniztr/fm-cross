@@ -39,7 +39,7 @@ export default function Home() {
           className="border border-black"
           {...register('content')}
         />
-        <Button variant="default" size="default" type="submit">
+        <Button variant="link" size="default" type="submit">
           Отправить
         </Button>
       </form>
