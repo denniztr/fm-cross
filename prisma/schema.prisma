@@ -17,10 +17,10 @@ model User {
   id            String      @id @default(auto()) @map("_id") @db.ObjectId
   name          String
   surname       String
-  username      String
   email         String?     @unique
   emailVerifed  DateTime?
   image         String?
+  hashedPassword String?
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
   account       Account[]
@@ -47,11 +47,6 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-model Post {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  title   String
-  content String
-}
 
 model Event {
   id           String      @id @default(auto()) @map("_id") @db.ObjectId
