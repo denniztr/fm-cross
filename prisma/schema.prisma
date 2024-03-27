@@ -13,8 +13,95 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  surname       String
+  username      String
+  email         String?     @unique
+  emailVerifed  DateTime?
+  image         String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  account       Account[]
+  createdEvents Event[]
+  events        EventUser[]
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
 model Post {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  title    String
-  content     String
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  title   String
+  content String
+}
+
+model Event {
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  description  String
+  location     String
+  startDate    DateTime
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  participants EventUser[]
+  categories   Category[]
+  tags         Tag[]
+  medias       Media[]
+  authorId     String[]    @db.ObjectId
+  author       User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
+}
+
+model EventUser {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  eventId String @db.ObjectId
+  event   Event  @relation(fields: [eventId], references: [id])
+  userId  String @db.ObjectId
+  user    User   @relation(fields: [userId], references: [id])
+}
+
+model Category {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  eventId     String   @db.ObjectId
+  event       Event    @relation(fields: [eventId], references: [id])
+}
+
+model Tag {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  eventId   String   @db.ObjectId
+  event     Event    @relation(fields: [eventId], references: [id])
+}
+
+model Media {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  url       String
+  type      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  event     Event    @relation(fields: [eventId], references: [id])
+  eventId   String   @db.ObjectId
 }
