@@ -34,6 +34,7 @@ const AuthForm = () => {
     console.log(values)
   };
 
+  
   return (
     <div className="w-[400px] p-12">
       <Form {...form}>
