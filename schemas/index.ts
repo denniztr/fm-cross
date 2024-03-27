@@ -2,7 +2,7 @@
 
 import * as z from 'zod';
 
-export const FormSchema = z.object({
+export const SignUpSchema = z.object({
   email: z.string().email({
     message: 'Введите электронную почту'
   }),

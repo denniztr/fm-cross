@@ -1,10 +1,10 @@
 'use client';
 
+import { useTransition } from 'react';
 import * as z from 'zod';
-
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FormSchema } from '@/schemas';
+import { SignUpSchema } from '@/schemas';
 import {
   Form,
   FormControl,
@@ -17,11 +17,15 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
+import { signIn, useSession } from 'next-auth/react';
 
+import axios from 'axios';
 
 const AuthForm = () => {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const [isPending, startTransition] = useTransition();
+
+  const form = useForm<z.infer<typeof SignUpSchema>>({
+    resolver: zodResolver(SignUpSchema),
     defaultValues: {
       name: '',
       surname: '',
@@ -30,11 +34,20 @@ const AuthForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof FormSchema>) => {
-    console.log(values)
+  const onSubmit = (data: z.infer<typeof SignUpSchema>) => {
+    startTransition(() => {
+    axios
+      .post('/api/register', data)
+      .then((cb) => {
+        console.log(cb);
+      })
+      .catch((error) => {
+        console.log(error, 'axios');
+      });
+    });
+    console.log(data);
   };
 
-  
   return (
     <div className="w-[400px] p-12">
       <Form {...form}>
@@ -49,6 +62,7 @@ const AuthForm = () => {
                   <FormControl>
                     <Input
                       {...field}
+                      disabled={isPending}
                       placeholder="example@gmail.com"
                       type="email"
                     />
@@ -64,7 +78,12 @@ const AuthForm = () => {
                 <FormItem>
                   <FormLabel>Пароль</FormLabel>
                   <FormControl>
-                    <Input {...field} type="password" placeholder="******" />
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      type="password"
+                      placeholder="******"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -77,7 +96,12 @@ const AuthForm = () => {
                 <FormItem>
                   <FormLabel>Имя</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Денис" type="name" />
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="Денис"
+                      type="name"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -90,16 +114,29 @@ const AuthForm = () => {
                 <FormItem>
                   <FormLabel>Фамилия</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Иванов" type="surname" />
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="Иванов"
+                      type="surname"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
-          <Button variant="link">Создать аккаунт</Button>
+          <Button variant="outline" disabled={isPending} type="submit">
+            Создать аккаунт
+          </Button>
         </form>
       </Form>
+      <div className="flex gap-2 justify-center items-center">
+        <p className="text-xs font-gray-500">Уже есть аккаунт?</p>
+        <Button variant="link" size="sm">
+          Войти
+        </Button>
+      </div>
     </div>
   );
 };
