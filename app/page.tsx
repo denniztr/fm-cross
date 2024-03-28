@@ -1,16 +1,17 @@
-'use client';
+import getCurrentUser from '@/app/actions/getCurrentUser';
+import SignOut from '@/components/SignOut';
 
-import { signOut } from 'next-auth/react';
-import { Button } from '@/components/ui/button';
+export default async function Home() {
+  const currentUser = await getCurrentUser();
 
-export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       Главная страница
       <div>
-        <Button onClick={() => signOut()} variant="outline">
-          Выйти
-        </Button>
+        <p>
+          user: {currentUser?.name} {currentUser?.surname} {currentUser?.email}
+        </p>
+        <SignOut />
       </div>
     </main>
   );

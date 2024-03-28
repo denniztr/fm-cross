@@ -1,14 +1,13 @@
 'use client';
 
 import { useTransition, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SignInSchema } from '@/schemas';
 
@@ -22,16 +21,20 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
 
 const SignInPage = () => {
   const router = useRouter();
   const session = useSession();
+  const { toast } = useToast();
 
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    console.log(session);
-  }, [session]);
+    if (session.status === 'authenticated') {
+      router.push('/');
+    }
+  }, [session, router]);
 
   const form = useForm<z.infer<typeof SignInSchema>>({
     resolver: zodResolver(SignInSchema),
@@ -44,9 +47,30 @@ const SignInPage = () => {
   const onSubmit = (data: z.infer<typeof SignInSchema>) => {
     startTransition(() => {
       signIn('credentials', { ...data, redirect: false }).then((cb) => {
-        if (cb?.status === 200) {
-          router.push('/');
+
+        if (cb?.error === 'Такой пользователь не существует') {
+          toast({
+            title: 'Ошибка',
+            description: 'Пользователь с такой электронной почтой не найден',
+            variant: 'destructive',
+          });
         }
+
+        if (cb?.error === 'Неверный пароль') {
+          toast({
+            title: 'Ошибка',
+            description: 'Введён неверный пароль',
+            variant: 'destructive',
+          });
+        }
+
+        if (cb?.status === 200) {
+          toast({
+            title: 'Авторизация',
+            description: 'Вы успешно вошли в свой аккаунт',
+          });
+        }
+
       });
     });
   };

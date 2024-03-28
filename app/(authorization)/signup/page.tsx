@@ -13,16 +13,19 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormDescription,
   FormMessage,
 } from '@/components/ui/form';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/use-toast';
 
 import axios from 'axios';
 
 const SignUpPage = () => {
-  const router = useRouter()
+  const router = useRouter();
+  const { toast } = useToast();
 
   const [isPending, startTransition] = useTransition();
 
@@ -42,11 +45,20 @@ const SignUpPage = () => {
         .post('/api/register', data)
         .then((cb) => {
           if (cb.status === 200) {
-            router.push('/signin')
+            router.push('/signin');
+            toast({
+              title: 'Успешная регистрация',
+              description: 'Вы успешно зарегистрировались',
+            });
           }
         })
         .catch((error) => {
-          console.log(error, 'axios');
+          console.log('ошибка', error);
+          toast({
+            title: 'Что-то пошло не так!',
+            description: 'Возможно такая электронная почта уже занята',
+            variant: 'destructive',
+          });
         });
     });
   };
@@ -124,6 +136,9 @@ const SignUpPage = () => {
                       type="surname"
                     />
                   </FormControl>
+                  <FormDescription className="text-xs text-center">
+                    Ваше имя и фамилию увидят другие пользователи
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

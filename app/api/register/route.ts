@@ -13,7 +13,11 @@ export async function POST(request: Request) {
       },
     });
 
-    if (existingEmail) throw new NextResponse('Пользователь с таким email уже зарегистрирован', { status: 400 })
+    if (existingEmail) {
+      throw new NextResponse('Пользователь с таким email уже зарегистрирован', {
+        status: 400,
+      });
+    }
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -29,6 +33,6 @@ export async function POST(request: Request) {
     return NextResponse.json(user);
   } catch (error: any) {
     console.log(error, 'REGISTRATION_ERROR');
-    return new NextResponse('Internal Error', { status: 500 });
+    return new NextResponse('Internal Error здесь', { status: 500 });
   }
 }
