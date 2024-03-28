@@ -1,17 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import { Button } from './ui/button';
 
-const LoginButton = () => {
+const CreateEventButton = () => {
   return (
     <Link
       href="/signin"
       className="text-sm underline-offset-4 transition duration-500 hover:underline"
     >
-      Войти
+      Организовать мероприятие
     </Link>
   );
 };
 
-export default LoginButton;
+export default CreateEventButton;
