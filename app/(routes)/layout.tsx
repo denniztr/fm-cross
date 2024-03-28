@@ -1,11 +1,13 @@
+import Header from "@/components/Header";
+
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-full flex flex-col justify-center content-center items-center">
-      <h2>(routes root)</h2>
+    <div className="h-full">
+      <Header/>
       <div>{children}</div>
     </div>
   );
