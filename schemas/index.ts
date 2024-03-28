@@ -14,6 +14,10 @@ export const SignUpSchema = z.object({
 });
 
 export const SignInSchema = z.object({
-  email: z.string(),
-  password: z.string(),
+  email: z.string().min(1, {
+    message: 'Заполните поле'
+  }),
+  password: z.string().min(1, {
+    message: 'Заполните поле'
+  }),
 })

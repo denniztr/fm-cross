@@ -1,6 +1,8 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
+import { useTransition, useEffect } from 'react';
+
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -23,6 +25,13 @@ import { Button } from '@/components/ui/button';
 
 const SignInPage = () => {
   const router = useRouter();
+  const session = useSession();
+
+  const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    console.log(session);
+  }, [session]);
 
   const form = useForm<z.infer<typeof SignInSchema>>({
     resolver: zodResolver(SignInSchema),
@@ -33,9 +42,13 @@ const SignInPage = () => {
   });
 
   const onSubmit = (data: z.infer<typeof SignInSchema>) => {
-    signIn('credentials', { ...data, redirect: false }).then((cb) =>
-      console.log(cb)
-    );
+    startTransition(() => {
+      signIn('credentials', { ...data, redirect: false }).then((cb) => {
+        if (cb?.status === 200) {
+          router.push('/');
+        }
+      });
+    });
   };
 
   return (
@@ -51,7 +64,12 @@ const SignInPage = () => {
                   <FormItem>
                     <FormLabel>Электронная почта</FormLabel>
                     <FormControl>
-                      <Input {...field} type="email" />
+                      <Input
+                        {...field}
+                        type="email"
+                        disabled={isPending}
+                        placeholder="example@gmail.com"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -64,7 +82,12 @@ const SignInPage = () => {
                   <FormItem>
                     <FormLabel>Пароль</FormLabel>
                     <FormControl>
-                      <Input {...field} type="password" />
+                      <Input
+                        {...field}
+                        type="password"
+                        disabled={isPending}
+                        placeholder="******"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
