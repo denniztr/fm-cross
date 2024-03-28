@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
@@ -17,11 +19,11 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-import { signIn, useSession } from 'next-auth/react';
-
 import axios from 'axios';
 
-const AuthForm = () => {
+const SignUpPage = () => {
+  const router = useRouter()
+
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof SignUpSchema>>({
@@ -36,20 +38,21 @@ const AuthForm = () => {
 
   const onSubmit = (data: z.infer<typeof SignUpSchema>) => {
     startTransition(() => {
-    axios
-      .post('/api/register', data)
-      .then((cb) => {
-        console.log(cb);
-      })
-      .catch((error) => {
-        console.log(error, 'axios');
-      });
+      axios
+        .post('/api/register', data)
+        .then((cb) => {
+          if (cb.status === 200) {
+            router.push('/signin')
+          }
+        })
+        .catch((error) => {
+          console.log(error, 'axios');
+        });
     });
-    console.log(data);
   };
 
   return (
-    <div className="w-[400px] p-12">
+    <div className="w-[400px] p-12 space-y-8">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-4">
@@ -126,19 +129,26 @@ const AuthForm = () => {
               )}
             />
           </div>
-          <Button variant="outline" disabled={isPending} type="submit">
+          <Button
+            variant="outline"
+            disabled={isPending}
+            type="submit"
+            className="w-full"
+          >
             Создать аккаунт
           </Button>
         </form>
       </Form>
       <div className="flex gap-2 justify-center items-center">
         <p className="text-xs font-gray-500">Уже есть аккаунт?</p>
-        <Button variant="link" size="sm">
-          Войти
-        </Button>
+        <Link href="/signin">
+          <Button variant="link" size="sm">
+            Войти
+          </Button>
+        </Link>
       </div>
     </div>
   );
 };
 
-export default AuthForm;
+export default SignUpPage;

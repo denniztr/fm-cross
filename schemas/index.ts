@@ -12,3 +12,8 @@ export const SignUpSchema = z.object({
     message: 'Пароль должен содержать минимум 5 символов'
   }),
 });
+
+export const SignInSchema = z.object({
+  email: z.string(),
+  password: z.string(),
+})
