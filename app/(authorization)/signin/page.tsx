@@ -1,6 +1,6 @@
 'use client';
 
-import { useTransition, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { signIn, useSession } from 'next-auth/react';
@@ -28,7 +28,7 @@ const SignInPage = () => {
   const session = useSession();
   const { toast } = useToast();
 
-  const [isPending, startTransition] = useTransition();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (session.status === 'authenticated') {
@@ -45,9 +45,10 @@ const SignInPage = () => {
   });
 
   const onSubmit = (data: z.infer<typeof SignInSchema>) => {
-    startTransition(() => {
-      signIn('credentials', { ...data, redirect: false }).then((cb) => {
+    setIsLoading(true);
 
+    signIn('credentials', { ...data, redirect: false })
+      .then((cb) => {
         if (cb?.error === 'Такой пользователь не существует') {
           toast({
             title: 'Ошибка',
@@ -70,9 +71,8 @@ const SignInPage = () => {
             description: 'Вы успешно вошли в свой аккаунт',
           });
         }
-
-      });
-    });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -91,7 +91,7 @@ const SignInPage = () => {
                       <Input
                         {...field}
                         type="email"
-                        disabled={isPending}
+                        disabled={isLoading}
                         placeholder="example@gmail.com"
                       />
                     </FormControl>
@@ -109,7 +109,7 @@ const SignInPage = () => {
                       <Input
                         {...field}
                         type="password"
-                        disabled={isPending}
+                        disabled={isLoading}
                         placeholder="******"
                       />
                     </FormControl>
@@ -118,7 +118,7 @@ const SignInPage = () => {
                 )}
               />
             </div>
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full" disabled={isLoading}>
               Войти
             </Button>
           </form>

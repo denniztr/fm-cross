@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useTransition } from 'react';
+import { useState } from 'react';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -27,7 +27,7 @@ const SignUpPage = () => {
   const router = useRouter();
   const { toast } = useToast();
 
-  const [isPending, startTransition] = useTransition();
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
@@ -40,27 +40,26 @@ const SignUpPage = () => {
   });
 
   const onSubmit = (data: z.infer<typeof SignUpSchema>) => {
-    startTransition(() => {
-      axios
-        .post('/api/register', data)
-        .then((cb) => {
-          if (cb.status === 200) {
-            router.push('/signin');
-            toast({
-              title: 'Успешная регистрация',
-              description: 'Вы успешно зарегистрировались',
-            });
-          }
-        })
-        .catch((error) => {
-          console.log('ошибка', error);
+    setIsLoading(true);
+    axios
+      .post('/api/register', data)
+      .then((cb) => {
+        if (cb.status === 200) {
+          router.push('/signin');
           toast({
-            title: 'Что-то пошло не так!',
-            description: 'Возможно такая электронная почта уже занята',
-            variant: 'destructive',
+            title: 'Успешная регистрация',
+            description: 'Вы успешно зарегистрировались',
           });
+        }
+      })
+      .catch((error) => {
+        toast({
+          title: 'Что-то пошло не так!',
+          description: 'Возможно такая электронная почта уже занята',
+          variant: 'destructive',
         });
-    });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -77,7 +76,7 @@ const SignUpPage = () => {
                   <FormControl>
                     <Input
                       {...field}
-                      disabled={isPending}
+                      disabled={isLoading}
                       placeholder="example@gmail.com"
                       type="email"
                     />
@@ -95,7 +94,7 @@ const SignUpPage = () => {
                   <FormControl>
                     <Input
                       {...field}
-                      disabled={isPending}
+                      disabled={isLoading}
                       type="password"
                       placeholder="******"
                     />
@@ -113,7 +112,7 @@ const SignUpPage = () => {
                   <FormControl>
                     <Input
                       {...field}
-                      disabled={isPending}
+                      disabled={isLoading}
                       placeholder="Денис"
                       type="name"
                     />
@@ -131,7 +130,7 @@ const SignUpPage = () => {
                   <FormControl>
                     <Input
                       {...field}
-                      disabled={isPending}
+                      disabled={isLoading}
                       placeholder="Иванов"
                       type="surname"
                     />
@@ -146,7 +145,7 @@ const SignUpPage = () => {
           </div>
           <Button
             variant="outline"
-            disabled={isPending}
+            disabled={isLoading}
             type="submit"
             className="w-full"
           >
