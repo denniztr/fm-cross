@@ -1,3 +1,5 @@
+import User from '@prisma/client'
+import getCurrentUser from '@/app/actions/getCurrentUser'
 import Header from "@/components/Header";
 
 export default async function Layout({
@@ -5,9 +7,10 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
+  const currentUser  = await getCurrentUser();
   return (
     <div className="h-full">
-      <Header/>
+      <Header currentUser={currentUser} />
       <div>{children}</div>
     </div>
   );
