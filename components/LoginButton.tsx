@@ -3,13 +3,18 @@
 import Link from 'next/link';
 import { Button } from './ui/button';
 
-const LoginButton = () => {
+interface LoginButtonProps {
+  href: string
+  children: React.ReactNode
+}
+
+const LoginButton: React.FC<LoginButtonProps> = ({ href, children }) => {
   return (
     <Link
-      href="/signin"
-      className="text-sm underline-offset-4 transition duration-500 hover:underline"
+      href={href}
+      
     >
-      Войти
+      <Button>{children}</Button>
     </Link>
   );
 };

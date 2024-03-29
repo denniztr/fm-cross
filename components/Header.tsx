@@ -11,7 +11,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ currentUser }) => {
   return (
-    <header className="w-full h-12 flex justify-center items-center px-16">
+    <header className="w-full h-12 flex justify-center items-center">
       <div className="min-w-[1200px] flex justify-between items-center">
         <div className="flex items-center gap-4">
           <h1 className="">Логотип</h1>
@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
           {currentUser ? (
             <SheetLayout currentUser={currentUser} />
           ) : (
-            <LoginButton />
+            <LoginButton href="/signin">Войти</LoginButton>
           )}
         </div>
       </div>
