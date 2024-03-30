@@ -5,7 +5,11 @@ import { Button } from './ui/button';
 
 const SignOut = () => {
   return (
-    <Button className="w-full" variant="outline" onClick={() => signOut()}>
+    <Button
+      className="w-full"
+      variant="outline"
+      onClick={() => signOut()}
+    >
       Выйти из профиля
     </Button>
   );

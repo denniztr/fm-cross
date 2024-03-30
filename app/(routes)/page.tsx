@@ -1,0 +1,58 @@
+import Image from 'next/image';
+import getCurrentUser from '@/app/actions/getCurrentUser';
+
+import LoginButton from '@/components/LoginButton';
+import Categories from '@/components/category/Categories';
+
+export default async function Home() {
+  const currentUser = await getCurrentUser();
+
+  return (
+    <main className="h-full">
+      <section className="flex flex-row flex-wrap items-center">
+        <div className="w-1/2 space-y-8">
+          <h1 className="font-semibold text-4xl">
+            <span className="text-testColor">Платформа</span> для людей, где с
+            общих интересов начинается дружба
+          </h1>
+          <p className="leading-7 pb-8">
+            Какие бы ни были у вас интересы, от туризма и чтения до общения и
+            желания поделиться своими умениями, вы всегда найдете в{' '}
+            <span className="text-titleColor font-semibold">МестоВстречи</span>{' '}
+            людей, которые разделяют их. Мероприятия проводятся каждый день —
+            зарегистрируйтесь и присоединяйтесь!
+          </p>
+          {currentUser ? (
+            <LoginButton href="/events">Найти мероприятие</LoginButton>
+          ) : (
+            <LoginButton href="/signup">Присоединиться</LoginButton>
+          )}
+        </div>
+        <div className="relative w-[500px] h-[500px]">
+          <Image src="/dayflow.svg" fill alt="FrontImage" />
+        </div>
+      </section>
+      <section className="pt-6">
+        <h2 className="font-semibold text-2xl">Популярные категории</h2>
+        <Categories />
+      </section>
+      <section className="pt-20">
+        <h2 className="font-semibold text-2xl">Предстоящие мероприятия</h2>
+        <div className="pt-4">Карточки с мероприятиями</div>
+      </section>
+      <section className="pt-20">
+        <h2 className="font-semibold text-2xl">
+          Предстоящие онлайн-мероприятия
+        </h2>
+        <div className="pt-4">Карточки с онлайн-мероприятиями</div>
+      </section>
+      <section className="pt-20">
+        <h2 className="font-semibold text-2xl">
+          <span className="text-testColor">МестоВстречи</span> - это место где
+          начинается дружба!
+        </h2>
+        <div className="pt-4">Три карточки со статьями</div>
+      </section>
+    </main>
+  );
+}

@@ -1,0 +1,8 @@
+Breakpoints:
+
+- lg desktop > 1440 pt
+- sm desktop < 1440 pt
+- tb < 1024 pt
+- mobile landscape < 768 pt
+- mobile portrait < 480 pt
+- mobile base 360 / 375 pt

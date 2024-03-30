@@ -47,7 +47,7 @@ const SignInPage = () => {
   const onSubmit = (data: z.infer<typeof SignInSchema>) => {
     setIsLoading(true);
 
-    signIn('credentials', { ...data, redirect: false })
+    signIn('credentials', { ...data, redirect: true })
       .then((cb) => {
         if (cb?.error === 'Такой пользователь не существует') {
           toast({
