@@ -7,7 +7,7 @@ const Categories = () => {
   const categoryRoutes = useCategoryRoutes();
 
   return (
-    <div className="w-full flex justify-around pt-6">
+    <div className="w-full flex justify-around pt-10">
       {categoryRoutes.map((category) => (
         <CategoryItem
           key={category.label}

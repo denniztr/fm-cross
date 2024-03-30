@@ -53,7 +53,8 @@ const config = {
           foreground: 'hsl(var(--card-foreground))',
         },
         titleColor: 'rgb(226, 90, 158)',
-        testColor: 'rgb(162, 36, 136)',
+        testColor: 'rgb(149, 81, 203)',
+        hoverTestColor: 'rgb(128, 67, 177)',
       },
       borderRadius: {
         lg: 'var(--radius)',

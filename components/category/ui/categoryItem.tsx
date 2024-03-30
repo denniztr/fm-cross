@@ -24,7 +24,12 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ image, href, label }) => {
           "
       >
         <Link href={href}>
-          <Image src={image} fill alt={label} />
+          <Image
+            src={image}
+            fill
+            alt={label}
+            className="transition-transform duration-500 transform hover:scale-110"
+          />
         </Link>
       </div>
       <span>{label}</span>
