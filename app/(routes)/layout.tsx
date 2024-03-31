@@ -10,7 +10,7 @@ export default async function Layout({
 }) {
   const currentUser = await getCurrentUser();
   return (
-    <div className="h-full">
+    <div className="">
       {/* пофиксить ошибку тс */}
       <Header currentUser={currentUser!} />
       <div className="w-[1200px] m-auto pb-14">{children}</div>
