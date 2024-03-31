@@ -42,12 +42,15 @@ const EventCard = () => {
             </p>
             <p>Бесплатно</p>
           </div>
-          <div>
+          <div className="space-y-4 font-semibold">
             <p>
               Организатор:{' '}
-              <span className="ml-1 cursor-pointer underline-offset-4 hover:underline">
+              <span className="ml-1 font-normal cursor-pointer underline-offset-4 hover:underline">
                 Василий Скунгс
               </span>
+            </p>
+            <p>
+              Начало: <span className="font-normal">08 апреля 2024, 13:00</span>
             </p>
           </div>
         </div>
