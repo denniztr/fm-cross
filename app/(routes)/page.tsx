@@ -3,6 +3,8 @@ import getCurrentUser from '@/app/actions/getCurrentUser';
 
 import LoginButton from '@/components/LoginButton';
 import Categories from '@/components/category/Categories';
+import EventCard from '@/components/EventCard';
+import ArticleCard from '@/components/ArticleCard';
 
 export default async function Home() {
   const currentUser = await getCurrentUser();
@@ -12,13 +14,12 @@ export default async function Home() {
       <section className="flex flex-row flex-wrap items-center">
         <div className="w-1/2 space-y-8">
           <h1 className="font-semibold text-4xl">
-            <span className="text-testColor">Платформа</span> для людей, где с
-            общих интересов начинается дружба
+            Платформа для людей, где с общих интересов начинается дружба
           </h1>
           <p className="leading-7 pb-8">
             Какие бы ни были у вас интересы, от туризма и чтения до общения и
             желания поделиться своими умениями, вы всегда найдете в{' '}
-            <span className="text-titleColor font-semibold">МестоВстречи</span>{' '}
+            <span className="text-testColor font-bold">МестоВстречи</span>{' '}
             людей, которые разделяют их. Мероприятия проводятся каждый день —
             зарегистрируйтесь и присоединяйтесь!
           </p>
@@ -32,26 +33,34 @@ export default async function Home() {
           <Image src="/dayflow.svg" fill alt="FrontImage" />
         </div>
       </section>
-      <section className="pt-6">
+      <section className="">
         <h2 className="font-semibold text-2xl">Популярные категории</h2>
         <Categories />
       </section>
       <section className="pt-20">
         <h2 className="font-semibold text-2xl">Предстоящие мероприятия</h2>
-        <div className="pt-4">Карточки с мероприятиями</div>
+        <div className="pt-10">
+          <EventCard />
+        </div>
       </section>
       <section className="pt-20">
         <h2 className="font-semibold text-2xl">
           Предстоящие онлайн-мероприятия
         </h2>
-        <div className="pt-4">Карточки с онлайн-мероприятиями</div>
+        <div className="pt-10">
+          <EventCard />
+        </div>
       </section>
       <section className="pt-20">
         <h2 className="font-semibold text-2xl">
-          <span className="text-testColor">МестоВстречи</span> - это место где
-          начинается дружба!
+          <span className="">МестоВстречи</span> - это место где начинается
+          дружба!
         </h2>
-        <div className="pt-4">Три карточки со статьями</div>
+        <div className="pt-10 pb-20 flex gap-3">
+          <ArticleCard />
+          <ArticleCard />
+          <ArticleCard />
+        </div>
       </section>
     </main>
   );

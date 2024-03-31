@@ -2,10 +2,15 @@
 
 import Link from 'next/link';
 
-const CreateEventButton = () => {
+
+interface CreateEventButtonProps {
+  href: string
+}
+
+const CreateEventButton: React.FC<CreateEventButtonProps> = ({ href }) => {
   return (
     <Link
-      href="/signin"
+      href={href}
       className="text-sm underline-offset-4 transition duration-500 hover:underline"
     >
       Организовать мероприятие
