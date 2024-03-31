@@ -56,7 +56,7 @@ export default async function Home() {
           <span className="">МестоВстречи</span> - это место где начинается
           дружба!
         </h2>
-        <div className="pt-10 pb-20 flex gap-3">
+        <div className="pt-10 flex gap-3">
           <ArticleCard />
           <ArticleCard />
           <ArticleCard />

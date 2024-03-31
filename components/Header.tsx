@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
           </div>
         </div>
         <div className="space-x-4">
-          <CreateEventButton href={currentUser ? '/' : '/signup'}/>
+          <CreateEventButton href={currentUser ? '/events/add' : '/signup'}/>
           {currentUser ? (
             <SheetLayout currentUser={currentUser} />
           ) : (
