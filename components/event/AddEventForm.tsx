@@ -1,11 +1,12 @@
 import { Input } from '../ui/input';
-
+import { Textarea } from '../ui/textarea';
 const AddEventForm = () => {
   return (
     <div>
       Форма добавления
-      <form>
-        <Input className="w-full" placeholder="Название мероприятия" />
+      <form className='space-y-3'>
+        <Input className="w-full pb-" placeholder="Название мероприятия" />
+        <Textarea />
       </form>
     </div>
   );
