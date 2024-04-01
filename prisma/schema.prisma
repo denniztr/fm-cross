@@ -52,6 +52,7 @@ model Event {
   title        String
   description  String
   location     String
+  eventType String
   startDate    DateTime
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
