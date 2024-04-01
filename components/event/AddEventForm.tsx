@@ -32,18 +32,19 @@ const AddEventForm = () => {
       startDate: '',
       startTime: '',
       eventType: '',
+      media: '',
     },
   });
 
-  const onSubmit = (data: z.infer<typeof AddEventSchema>) => {
-    console.log(data);
+  const onSubmit = (values: z.infer<typeof AddEventSchema>) => {
+    console.log(values);
   };
 
   return (
     <div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-          <div className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <div className="space-y-3">
             <FormField
               control={form.control}
               name="title"
@@ -57,10 +58,40 @@ const AddEventForm = () => {
                       placeholder="Название мероприятия"
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
-
+            <div className="flex gap-4">
+              <FormField
+                control={form.control}
+                name="eventType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Выберите вид мероприятия</FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormItem>
+                          <FormControl>
+                            <RadioGroupItem value="offline" />
+                          </FormControl>
+                          <FormLabel>Оффлайн мероприятие</FormLabel>
+                        </FormItem>
+                        <FormItem>
+                          <FormControl>
+                            <RadioGroupItem value="online" />
+                          </FormControl>
+                          <FormLabel>Онлайн мероприятие</FormLabel>
+                        </FormItem>
+                      </RadioGroup>
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
             <div>
               <h3>Время начала мероприятия</h3>
               <div className="flex space-x-2">
@@ -114,6 +145,7 @@ const AddEventForm = () => {
                       className="min-h-64"
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />

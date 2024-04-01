@@ -36,6 +36,6 @@ export const AddEventSchema = z.object({
   location: z.string(),
   startDate: z.string(),
   startTime: z.string(),
-  eventType: z.string(),
+  eventType: z.enum(['online', 'offline']),
   media: z.string(),
 });
