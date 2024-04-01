@@ -55,6 +55,7 @@ const config = {
         titleColor: 'rgb(226, 90, 158)',
         testColor: 'rgb(149, 81, 203)',
         hoverTestColor: 'rgb(128, 67, 177)',
+        testBgColor: 'rgb(231, 236, 241)',
       },
       borderRadius: {
         lg: 'var(--radius)',

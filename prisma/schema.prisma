@@ -52,21 +52,25 @@ model Event {
   title        String
   description  String
   location     String
-  startDate    DateTime
+  eventType    String
+  startDate    String
+  startTime    String
+  category     String
+  // media        String
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
-  participants EventUser[]
-  categories   Category[]
-  tags         Tag[]
-  medias       Media[]
-  authorId     String[]    @db.ObjectId
+  // participants EventUser[]
+  // categories   Category[]
+  // tags         Tag[]
+  // medias       Media[]
+  authorId     String    @db.ObjectId
   author       User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
 }
 
 model EventUser {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   eventId String @db.ObjectId
-  event   Event  @relation(fields: [eventId], references: [id])
+  // event   Event  @relation(fields: [eventId], references: [id])
   userId  String @db.ObjectId
   user    User   @relation(fields: [userId], references: [id])
 }
@@ -78,7 +82,7 @@ model Category {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   eventId     String   @db.ObjectId
-  event       Event    @relation(fields: [eventId], references: [id])
+  // event       Event    @relation(fields: [eventId], references: [id])
 }
 
 model Tag {
@@ -87,7 +91,7 @@ model Tag {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   eventId   String   @db.ObjectId
-  event     Event    @relation(fields: [eventId], references: [id])
+  // event     Event    @relation(fields: [eventId], references: [id])
 }
 
 model Media {
@@ -96,6 +100,6 @@ model Media {
   type      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  event     Event    @relation(fields: [eventId], references: [id])
+  // event     Event    @relation(fields: [eventId], references: [id])
   eventId   String   @db.ObjectId
 }
