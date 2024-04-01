@@ -1,6 +1,7 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import useGetCategoryRoutes from '@/app/_hooks/useCategoryRoutes'
 
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -34,6 +35,7 @@ import axios from 'axios';
 
 const AddEventForm = () => {
   const { toast } = useToast();
+  const category = useGetCategoryRoutes();
 
   const form = useForm<z.infer<typeof AddEventSchema>>({
     resolver: zodResolver(AddEventSchema),
@@ -114,14 +116,9 @@ const AddEventForm = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Бизнес">Бизнес</SelectItem>
-                      <SelectItem value="Музыка">Музыка</SelectItem>
-                      <SelectItem value="Вечеринки">Вечеринки</SelectItem>
-                      <SelectItem value="Фитнесс">Фитнесс</SelectItem>
-                      <SelectItem value="Воркшопы">Воркшопы</SelectItem>
-                      <SelectItem value="Искусство">Искусство</SelectItem>
-                      <SelectItem value="Путешествия">Путешествия</SelectItem>
-                      <SelectItem value="Дети">Дети</SelectItem>
+                      {category.map((item) => (
+                        <SelectItem key={item.label} value={item.label}>{item.label}</SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </FormItem>
