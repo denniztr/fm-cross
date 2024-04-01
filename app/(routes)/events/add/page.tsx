@@ -9,7 +9,6 @@ export default function Home() {
             <h1 className="font-semibold text-2xl">
               Опубликуйте своё мероприятие
             </h1>
-            <h3 className="font-semibold">Шаг 1</h3>
           </div>
           <div>
             <AddEventForm />

@@ -15,7 +15,16 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { useToast } from '@/components/ui/use-toast';
 
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
@@ -23,8 +32,9 @@ import { Button } from '../ui/button';
 
 import axios from 'axios';
 
-
 const AddEventForm = () => {
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof AddEventSchema>>({
     resolver: zodResolver(AddEventSchema),
     defaultValues: {
@@ -39,21 +49,44 @@ const AddEventForm = () => {
   });
 
   const onSubmit = (data: z.infer<typeof AddEventSchema>) => {
-    axios.post('/api/event', data)
-    .then((cb) => console.log(cb))
+    // console.log(data);
+    axios
+      .post('/api/event', data)
+      .then((cb) => {
+        if (cb.status !== 201) {
+          toast({
+            title: 'Ошибка!',
+            description: 'Что-то пошло не так!',
+          });
+        }
+
+        if (cb.status === 201) {
+          toast({
+            title: 'Поздравляем!',
+            description: 'Вы опубликовали новое мероприятие!',
+          });
+        }
+      })
+      .catch(() => {
+        toast({
+          title: 'Ошибка',
+          description: 'Что-то пошло не так!',
+          variant: 'destructive',
+        });
+      });
   };
 
   return (
     <div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <div className="space-y-3">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+          <div className="space-y-6">
             <FormField
               control={form.control}
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <h3>Название мероприятия</h3>
+                  <h3 className="font-semibold">Название мероприятия</h3>
                   <FormControl>
                     <Input
                       {...field}
@@ -70,11 +103,27 @@ const AddEventForm = () => {
               name="category"
               render={({ field }) => (
                 <FormItem>
-                  <h3>Выберите категорию</h3>
-                  <FormControl>
-                    <Input {...field} type="text" placeholder="Категория" />
-                  </FormControl>
-                  <FormMessage />
+                  <h3 className="font-semibold">Выберите категорию</h3>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Категория" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="Бизнес">Бизнес</SelectItem>
+                      <SelectItem value="Музыка">Музыка</SelectItem>
+                      <SelectItem value="Вечеринки">Вечеринки</SelectItem>
+                      <SelectItem value="Фитнесс">Фитнесс</SelectItem>
+                      <SelectItem value="Воркшопы">Воркшопы</SelectItem>
+                      <SelectItem value="Искусство">Искусство</SelectItem>
+                      <SelectItem value="Путешествия">Путешествия</SelectItem>
+                      <SelectItem value="Дети">Дети</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </FormItem>
               )}
             />
@@ -84,7 +133,7 @@ const AddEventForm = () => {
                 name="eventType"
                 render={({ field }) => (
                   <FormItem className="">
-                    <h3>Вид мероприятия</h3>
+                    <h3 className="font-semibold">Вид мероприятия</h3>
                     <FormControl>
                       <RadioGroup
                         onValueChange={field.onChange}
@@ -95,13 +144,17 @@ const AddEventForm = () => {
                           <FormControl>
                             <RadioGroupItem value="offline" />
                           </FormControl>
-                          <FormLabel>Оффлайн мероприятие</FormLabel>
+                          <FormLabel className="font-normal ml-1">
+                            Оффлайн мероприятие
+                          </FormLabel>
                         </FormItem>
                         <FormItem>
                           <FormControl>
                             <RadioGroupItem value="online" />
                           </FormControl>
-                          <FormLabel>Онлайн мероприятие</FormLabel>
+                          <FormLabel className="font-normal ml-1">
+                            Онлайн мероприятие
+                          </FormLabel>
                         </FormItem>
                       </RadioGroup>
                     </FormControl>
@@ -109,8 +162,8 @@ const AddEventForm = () => {
                 )}
               />
             </div>
-            <div>
-              <h3>Время начала мероприятия</h3>
+            <div className="space-y-2">
+              <h3 className="font-semibold">Время начала мероприятия</h3>
               <div className="flex space-x-2">
                 <FormField
                   control={form.control}
@@ -130,7 +183,7 @@ const AddEventForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input {...field} type="time"/>
+                        <Input {...field} type="time" />
                       </FormControl>
                     </FormItem>
                   )}
@@ -142,7 +195,7 @@ const AddEventForm = () => {
               name="location"
               render={({ field }) => (
                 <FormItem>
-                  <h3>Место проведения</h3>
+                  <h3 className="font-semibold">Место проведения</h3>
                   <FormControl>
                     <Input {...field} placeholder="Локация" />
                   </FormControl>
@@ -154,7 +207,7 @@ const AddEventForm = () => {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <h3>Описание мероприятия</h3>
+                  <h3 className="font-semibold">Описание мероприятия</h3>
                   <FormControl>
                     <Textarea
                       {...field}

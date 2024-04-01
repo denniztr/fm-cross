@@ -33,9 +33,19 @@ export const AddEventSchema = z.object({
   description: z.string().min(10, {
     message: 'Поле должно содержать минимум 10 символов',
   }),
-  location: z.string(),
-  startDate: z.string(),
-  startTime: z.string(),
-  category: z.string(),
-  eventType: z.string(),
+  location: z.string().min(1, {
+    message: 'Заполните поле'
+  }),
+  startDate: z.string().min(1, {
+    message: 'Заполните поле'
+  }),
+  startTime: z.string().min(1, {
+    message: 'Заполните поле'
+  }),
+  category: z.string().min(1, {
+    message: 'Заполните поле'
+  }),
+  eventType: z.string().min(1, {
+    message: 'Заполните поле'
+  }),
 });
