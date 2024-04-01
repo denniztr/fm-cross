@@ -19,7 +19,6 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
-import { Label } from '../ui/label';
 import { Button } from '../ui/button';
 
 const AddEventForm = () => {
@@ -32,6 +31,7 @@ const AddEventForm = () => {
       startDate: '',
       startTime: '',
       eventType: '',
+      category: '',
       media: '',
     },
   });
@@ -62,17 +62,31 @@ const AddEventForm = () => {
                 </FormItem>
               )}
             />
-            <div className="flex gap-4">
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <h3>Выберите категорию</h3>
+                  <FormControl>
+                    <Input {...field} type="text" placeholder="Категория" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div>
               <FormField
                 control={form.control}
                 name="eventType"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Выберите вид мероприятия</FormLabel>
+                  <FormItem className="">
+                    <h3>Вид мероприятия</h3>
                     <FormControl>
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
+                        className="flex items-center"
                       >
                         <FormItem>
                           <FormControl>
@@ -113,7 +127,7 @@ const AddEventForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input {...field} type="time" />
+                        <Input {...field} type="time"/>
                       </FormControl>
                     </FormItem>
                   )}
@@ -167,40 +181,6 @@ const AddEventForm = () => {
           </Button>
         </form>
       </Form>
-      {/* <form className="">
-          <Input className="w-full pb-" placeholder="Название мероприятия" />
-          <div>
-            Выберите вид мероприятия
-            <RadioGroup defaultValue="comfortable" className="flex gap-10">
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="offlineEvent" id="r1" />
-                <Label htmlFor="r1">Оффлайн мероприятие</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="onlineEvent" id="r2" />
-                <Label htmlFor="r2">Онлайн мероприятие</Label>
-              </div>
-            </RadioGroup>
-          </div>
-          <div>
-            <h3>Время начала мероприятия</h3>
-            <div className="flex space-x-2">
-              <Input type="date" className="w-36" />
-              <Input type="time" className="w-24" />
-            </div>
-          </div>
-          <div>
-            <h3>Описание мероприятия</h3>
-            <Textarea placeholder="Опишите подробно мероприятие" />
-          </div>
-          <div>
-            <h3>Выберите фотографию</h3>
-            <Input type="file" />
-          </div>
-          <Button type="submit" variant="outline">
-            Опубликовать
-          </Button>
-        </form> */}
     </div>
   );
 };

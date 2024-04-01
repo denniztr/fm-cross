@@ -27,8 +27,8 @@ export const SignInSchema = z.object({
 });
 
 export const AddEventSchema = z.object({
-  title: z.string().min(10, {
-    message: 'Поле должно содержать минимум 10 символов',
+  title: z.string().min(5, {
+    message: 'Поле должно содержать минимум 5 символов',
   }),
   description: z.string().min(10, {
     message: 'Поле должно содержать минимум 10 символов',
@@ -36,6 +36,7 @@ export const AddEventSchema = z.object({
   location: z.string(),
   startDate: z.string(),
   startTime: z.string(),
+  category: z.string(),
   eventType: z.enum(['online', 'offline']),
   media: z.string(),
 });
