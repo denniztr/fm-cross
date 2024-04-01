@@ -21,6 +21,9 @@ import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import { Button } from '../ui/button';
 
+import axios from 'axios';
+
+
 const AddEventForm = () => {
   const form = useForm<z.infer<typeof AddEventSchema>>({
     resolver: zodResolver(AddEventSchema),
@@ -32,12 +35,12 @@ const AddEventForm = () => {
       startTime: '',
       eventType: '',
       category: '',
-      media: '',
     },
   });
 
-  const onSubmit = (values: z.infer<typeof AddEventSchema>) => {
-    console.log(values);
+  const onSubmit = (data: z.infer<typeof AddEventSchema>) => {
+    axios.post('/api/event', data)
+    .then((cb) => console.log(cb))
   };
 
   return (
@@ -160,18 +163,6 @@ const AddEventForm = () => {
                     />
                   </FormControl>
                   <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="media"
-              render={({ field }) => (
-                <FormItem>
-                  <h3>Добавьте фотографию</h3>
-                  <FormControl>
-                    <Input {...field} type="file" />
-                  </FormControl>
                 </FormItem>
               )}
             />

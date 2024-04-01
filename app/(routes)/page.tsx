@@ -53,7 +53,7 @@ export default async function Home() {
       </section>
       <section className="pt-20">
         <h2 className="font-semibold text-2xl">
-          <span className="">МестоВстречи</span> - это место где начинается
+          <span className="">Логотип</span> - это место где начинается
           дружба!
         </h2>
         <div className="pt-10 flex gap-3">
