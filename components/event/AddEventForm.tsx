@@ -1,7 +1,9 @@
 'use client';
 
+import { useState } from 'react';
+
 import { useForm } from 'react-hook-form';
-import useGetCategoryRoutes from '@/app/_hooks/useCategoryRoutes'
+import useGetCategoryRoutes from '@/app/_hooks/useCategoryRoutes';
 
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,6 +16,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from '@/components/ui/form';
 
 import {
@@ -36,6 +39,7 @@ import axios from 'axios';
 const AddEventForm = () => {
   const { toast } = useToast();
   const category = useGetCategoryRoutes();
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof AddEventSchema>>({
     resolver: zodResolver(AddEventSchema),
@@ -52,6 +56,7 @@ const AddEventForm = () => {
 
   const onSubmit = (data: z.infer<typeof AddEventSchema>) => {
     // console.log(data);
+    setIsLoading(true);
     axios
       .post('/api/event', data)
       .then((cb) => {
@@ -75,7 +80,8 @@ const AddEventForm = () => {
           description: 'Что-то пошло не так!',
           variant: 'destructive',
         });
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -94,6 +100,7 @@ const AddEventForm = () => {
                       {...field}
                       type="text"
                       placeholder="Название мероприятия"
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />
@@ -109,6 +116,7 @@ const AddEventForm = () => {
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
+                    disabled={isLoading}
                   >
                     <FormControl>
                       <SelectTrigger>
@@ -117,7 +125,9 @@ const AddEventForm = () => {
                     </FormControl>
                     <SelectContent>
                       {category.map((item) => (
-                        <SelectItem key={item.label} value={item.label}>{item.label}</SelectItem>
+                        <SelectItem key={item.label} value={item.label}>
+                          {item.label}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -168,7 +178,7 @@ const AddEventForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input {...field} type="date" />
+                        <Input {...field} type="date"                         disabled={isLoading}/>
                       </FormControl>
                     </FormItem>
                   )}
@@ -180,7 +190,7 @@ const AddEventForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input {...field} type="time" />
+                        <Input {...field} type="time"                         disabled={isLoading}/>
                       </FormControl>
                     </FormItem>
                   )}
@@ -194,8 +204,13 @@ const AddEventForm = () => {
                 <FormItem>
                   <h3 className="font-semibold">Место проведения</h3>
                   <FormControl>
-                    <Input {...field} placeholder="Локация" />
+                    <Input {...field} placeholder="Локация"                         disabled={isLoading}/>
                   </FormControl>
+                  <FormDescription>
+                    Напишите полный адрес или оставьте ссылку если мероприятие
+                    онлайн
+                  </FormDescription>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -209,6 +224,7 @@ const AddEventForm = () => {
                     <Textarea
                       {...field}
                       placeholder="Опишите подробно мероприятие"
+                      disabled={isLoading}
                       className="min-h-64"
                     />
                   </FormControl>
