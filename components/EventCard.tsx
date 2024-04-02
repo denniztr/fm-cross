@@ -10,20 +10,21 @@ import Image from 'next/image';
 import { Button } from './ui/button';
 import Link from 'next/link';
 
-const EventCard = () => {
+const EventCard = ({
+  title,
+  description,
+  location,
+  startDate,
+  startTime,
+  category,
+}) => {
+  console.log(title);
   return (
     <Card className="w-[300px] transition duration-200 hover:shadow-lg">
       <CardHeader>
-        <CardTitle>Йога в финском парке</CardTitle>
-        <CardDescription className="max-h-16 overflow-hidden">
-          Групповое йога мероприятие - это событие, где участники собираются
-          вместе для занятий йогой в группе под руководством опытного
-          инструктора. В течение мероприятия участники выполняют различные асаны
-          (позы), дыхательные упражнения и медитации, нацеленные на улучшение
-          физического здоровья, снятие стресса и достижение гармонии тела и
-          разума. Групповые йога мероприятия обычно проводятся в дружественной и
-          поддерживающей атмосфере, способствуя взаимной поддержке и
-          сотрудничеству среди участников.
+        <CardTitle>{title}</CardTitle>
+        <CardDescription className="max-h-16 overflow-hidden text-sm">
+          {description}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -50,7 +51,13 @@ const EventCard = () => {
               </span>
             </p>
             <p>
-              Начало: <span className="font-normal">08 апреля 2024, 13:00</span>
+              Начало:{' '}
+              <span className="font-normal">
+                {startDate}, {startTime}
+              </span>
+            </p>
+            <p>
+              Место проведения: <span className="font-normal">{location}</span>
             </p>
           </div>
         </div>

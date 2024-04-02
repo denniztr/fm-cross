@@ -1,5 +1,8 @@
 import Image from 'next/image';
+
 import getCurrentUser from '@/app/actions/getCurrentUser';
+import getAllEvents from '@/app/actions/getAllEvents';
+
 
 import LoginButton from '@/components/LoginButton';
 import Categories from '@/components/category/Categories';
@@ -8,6 +11,8 @@ import ArticleCard from '@/components/ArticleCard';
 
 export default async function Home() {
   const currentUser = await getCurrentUser();
+  const allEvents = await getAllEvents();
+
 
   return (
     <main className="h-full">
@@ -40,7 +45,10 @@ export default async function Home() {
       <section className="pt-20">
         <h2 className="font-semibold text-2xl">Предстоящие мероприятия</h2>
         <div className="pt-10">
-          <EventCard />
+          {allEvents?.map((event) => (
+            <EventCard key={event.id} {...event} />
+          ))}
+          {/* <EventCard /> */}
         </div>
       </section>
       <section className="pt-20">
