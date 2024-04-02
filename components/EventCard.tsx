@@ -1,3 +1,5 @@
+import { User } from '@prisma/client';
+
 import {
   Card,
   CardContent,
@@ -9,21 +11,35 @@ import {
 import Image from 'next/image';
 import { Button } from './ui/button';
 import Link from 'next/link';
+import React from 'react';
 
-const EventCard = () => {
+interface EventCardProps {
+  id: string;
+  title: string;
+  description: string;
+  location: string;
+  startDate: string;
+  startTime: string;
+  category: string;
+  author: User;
+}
+
+const EventCard: React.FC<EventCardProps> = ({
+  id,
+  title,
+  description,
+  location,
+  startDate,
+  startTime,
+  category,
+  author,
+}) => {
   return (
     <Card className="w-[300px] transition duration-200 hover:shadow-lg">
       <CardHeader>
-        <CardTitle>Йога в финском парке</CardTitle>
-        <CardDescription className="max-h-16 overflow-hidden">
-          Групповое йога мероприятие - это событие, где участники собираются
-          вместе для занятий йогой в группе под руководством опытного
-          инструктора. В течение мероприятия участники выполняют различные асаны
-          (позы), дыхательные упражнения и медитации, нацеленные на улучшение
-          физического здоровья, снятие стресса и достижение гармонии тела и
-          разума. Групповые йога мероприятия обычно проводятся в дружественной и
-          поддерживающей атмосфере, способствуя взаимной поддержке и
-          сотрудничеству среди участников.
+        <CardTitle>{title}</CardTitle>
+        <CardDescription className="h-16 overflow-hidden text-sm">
+          {description}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -46,17 +62,26 @@ const EventCard = () => {
             <p>
               Организатор:{' '}
               <span className="ml-1 font-normal cursor-pointer underline-offset-4 hover:underline">
-                Василий Скунгс
+                {author?.name} {author?.surname}
               </span>
             </p>
             <p>
-              Начало: <span className="font-normal">08 апреля 2024, 13:00</span>
+              Начало:{' '}
+              <span className="font-normal">
+                {startDate}, {startTime}
+              </span>
+            </p>
+            <p>
+              Место проведения: <span className="font-normal">{location}</span>
+            </p>
+            <p>
+              Категория: <span className="font-normal">{category}</span>
             </p>
           </div>
         </div>
       </CardContent>
       <CardFooter>
-        <Link href="/events" className="w-full">
+        <Link href={`/events/${id}`} className="w-full">
           <Button
             className="w-full font-normal bg-testColor hover:bg-hoverTestColor"
             variant="default"

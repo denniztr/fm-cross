@@ -48,23 +48,23 @@ model Account {
 }
 
 model Event {
-  id           String      @id @default(auto()) @map("_id") @db.ObjectId
-  title        String
-  description  String
-  location     String
-  eventType    String
-  startDate    String
-  startTime    String
-  category     String
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  location    String
+  eventType   String
+  startDate   String
+  startTime   String
+  category    String
   // media        String
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   // participants EventUser[]
   // categories   Category[]
   // tags         Tag[]
   // medias       Media[]
-  authorId     String    @db.ObjectId
-  author       User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId    String   @db.ObjectId
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
 }
 
 model EventUser {
