@@ -60,13 +60,46 @@ export default async function Home({
                 imageStyles="object-contain"
               />
             </div>
-            <p>
-              Фотография, описание, фотографии с прошлых мероприятий?, категория
-            </p>
-            <p>{event?.description}</p>
+            <div className="leading-7">
+              <h3 className="py-5 font-semibold text-xl">О мероприятии</h3>
+              <p>{event?.description}</p>
+            </div>
+            <div>
+              <h3 className="py-5 font-semibold text-xl">
+                Фотографии с предыдущих мероприятий
+              </h3>
+              <div>здесь фотографии</div>
+            </div>
           </div>
-          <div className="w-1/3 p-4 rounded-xl border bg-card text-card-foreground shadow">
-            организатор, дата и время, адрес
+          <div className="w-1/3 h-auto space-y-4">
+            <div className="p-4 rounded-xl border bg-card text-card-foreground shadow space-y-6">
+              <div className="space-y-1">
+                <h5 className="font-semibold">Время и дата</h5>
+                <div>
+                  <p className="text-sm text-gray-500">
+                    {event?.startDate} {event?.startTime}
+                  </p>
+                </div>
+              </div>
+              <div className="space-y-1">
+                <h5 className="font-semibold">Локация</h5>
+                <div>
+                  <p className="text-sm text-gray-500">{event?.location}</p>
+                </div>
+              </div>
+              <div className="space-y-1">
+                <h5 className="font-semibold">Поделиться ссылкой</h5>
+                <div>
+                  <p>ссылка</p>
+                </div>
+              </div>
+            </div>
+            <div className="p-4 rounded-xl border bg-card text-card-foreground shadow">
+              <h5 className="font-semibold">Организатор</h5>
+              <p className="text-sm text-gray-500">
+                {event?.author?.name} {event?.author?.surname}
+              </p>
+            </div>
           </div>
         </div>
       </section>
