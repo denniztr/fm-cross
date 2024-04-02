@@ -13,16 +13,15 @@ import { Button } from './ui/button';
 import Link from 'next/link';
 import React from 'react';
 
-
 interface EventCardProps {
-  id: string,
-  title: string,
-  description: string,
-  location: string,
-  startDate: string,
-  startTime: string,
-  category: string,
-  author: User
+  id: string;
+  title: string;
+  description: string;
+  location: string;
+  startDate: string;
+  startTime: string;
+  category: string;
+  author: User;
 }
 
 const EventCard: React.FC<EventCardProps> = ({
@@ -39,7 +38,7 @@ const EventCard: React.FC<EventCardProps> = ({
     <Card className="w-[300px] transition duration-200 hover:shadow-lg">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
-        <CardDescription className="max-h-16 overflow-hidden text-sm">
+        <CardDescription className="h-16 overflow-hidden text-sm">
           {description}
         </CardDescription>
       </CardHeader>

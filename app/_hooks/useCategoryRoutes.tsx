@@ -6,42 +6,42 @@ const useCategoryRoutes = () => {
       {
         label: 'Бизнес',
         image: '/business.jpg',
-        href: '/events',
+        href: '/business',
       },
       {
         label: 'Музыка',
         image: '/music.jpg',
-        href: '/events'
+        href: '/music'
       },
       {
         label: 'Вечеринки',
         image: '/parties.jpg',
-        href: '/events'
+        href: '/parties'
       },
       {
         label: 'Фитнесс',
         image: '/healthFitness.jpg',
-        href: '/events'
+        href: '/fitness'
       },
       {
         label: 'Воркшопы',
         image: '/workshop.jpg',
-        href: '/events'
+        href: '/workshop'
       },
       {
         label: 'Искусство',
         image: '/art.jpg',
-        href: '/events'
+        href: '/art'
       },
       {
         label: 'Путешествия',
         image: '/travel.jpg',
-        href: '/events'
+        href: '/travel'
       },
       {
         label: 'Дети',
         image: '/kids.jpg',
-        href: '/events'
+        href: '/kids'
       },
     ],
     []

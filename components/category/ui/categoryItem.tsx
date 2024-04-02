@@ -23,7 +23,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ image, href, label }) => {
           cursor-pointer
           "
       >
-        <Link href={href}>
+        <Link href={`/events/category/${href}`}>
           <Image
             src={image}
             fill
