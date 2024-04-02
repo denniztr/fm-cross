@@ -3,6 +3,7 @@ import getCurrentUser from '@/app/actions/getCurrentUser';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+
 export default async function Layout({
   children,
 }: {

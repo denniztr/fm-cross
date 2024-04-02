@@ -17,8 +17,8 @@ const EventCard = ({
   startDate,
   startTime,
   category,
+  author,
 }) => {
-  console.log(title);
   return (
     <Card className="w-[300px] transition duration-200 hover:shadow-lg">
       <CardHeader>
@@ -47,7 +47,7 @@ const EventCard = ({
             <p>
               Организатор:{' '}
               <span className="ml-1 font-normal cursor-pointer underline-offset-4 hover:underline">
-                Василий Скунгс
+                {author?.name} {author?.surname}
               </span>
             </p>
             <p>

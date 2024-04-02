@@ -13,7 +13,6 @@ export default async function Home() {
   const currentUser = await getCurrentUser();
   const allEvents = await getAllEvents();
 
-
   return (
     <main className="h-full">
       <section className="flex flex-row flex-wrap items-center">
