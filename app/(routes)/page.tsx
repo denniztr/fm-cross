@@ -3,7 +3,6 @@ import Image from 'next/image';
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import getAllEvents from '@/app/actions/getAllEvents';
 
-
 import LoginButton from '@/components/LoginButton';
 import Categories from '@/components/category/Categories';
 import EventCard from '@/components/EventCard';
@@ -43,25 +42,21 @@ export default async function Home() {
       </section>
       <section className="pt-20">
         <h2 className="font-semibold text-2xl">Предстоящие мероприятия</h2>
-        <div className="pt-10">
+        <div className="pt-10 flex gap-3">
           {allEvents?.map((event) => (
             <EventCard key={event.id} {...event} />
           ))}
-          {/* <EventCard /> */}
         </div>
       </section>
       <section className="pt-20">
         <h2 className="font-semibold text-2xl">
           Предстоящие онлайн-мероприятия
         </h2>
-        <div className="pt-10">
-          {/* <EventCard /> */}
-        </div>
+        <div className="pt-10">{/* <EventCard /> */}</div>
       </section>
       <section className="pt-20">
         <h2 className="font-semibold text-2xl">
-          <span className="">Логотип</span> - это место где начинается
-          дружба!
+          <span className="">Логотип</span> - это место где начинается дружба!
         </h2>
         <div className="pt-10 flex gap-3">
           <ArticleCard />

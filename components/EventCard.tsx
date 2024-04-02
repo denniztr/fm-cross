@@ -15,6 +15,7 @@ import React from 'react';
 
 
 interface EventCardProps {
+  id: string,
   title: string,
   description: string,
   location: string,
@@ -25,6 +26,7 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = ({
+  id,
   title,
   description,
   location,
@@ -80,7 +82,7 @@ const EventCard: React.FC<EventCardProps> = ({
         </div>
       </CardContent>
       <CardFooter>
-        <Link href="/events" className="w-full">
+        <Link href={`/events/${id}`} className="w-full">
           <Button
             className="w-full font-normal bg-testColor hover:bg-hoverTestColor"
             variant="default"
