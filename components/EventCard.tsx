@@ -1,3 +1,5 @@
+import { User } from '@prisma/client';
+
 import {
   Card,
   CardContent,
@@ -9,8 +11,20 @@ import {
 import Image from 'next/image';
 import { Button } from './ui/button';
 import Link from 'next/link';
+import React from 'react';
 
-const EventCard = ({
+
+interface EventCardProps {
+  title: string,
+  description: string,
+  location: string,
+  startDate: string,
+  startTime: string,
+  category: string,
+  author: User
+}
+
+const EventCard: React.FC<EventCardProps> = ({
   title,
   description,
   location,
@@ -58,6 +72,9 @@ const EventCard = ({
             </p>
             <p>
               Место проведения: <span className="font-normal">{location}</span>
+            </p>
+            <p>
+              Категория: <span className="font-normal">{category}</span>
             </p>
           </div>
         </div>

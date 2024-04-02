@@ -55,7 +55,7 @@ export default async function Home() {
           Предстоящие онлайн-мероприятия
         </h2>
         <div className="pt-10">
-          <EventCard />
+          {/* <EventCard /> */}
         </div>
       </section>
       <section className="pt-20">
