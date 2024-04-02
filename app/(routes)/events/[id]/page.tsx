@@ -3,9 +3,9 @@ import getEventById from '@/app/actions/getEventById';
 export default async function Home({
   params: { id },
 }: {
-  params: { id: any };
+  params: { id: string };
 }) {
-  const event = await getEventById({ id });
+  const event = await getEventById(id);
   console.log(event);
 
   return (
