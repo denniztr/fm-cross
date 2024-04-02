@@ -1,13 +1,22 @@
 import Image from 'next/image';
 
 interface ImageProps {
-  className: string
+  className: string;
+  imageStyles: string;
 }
 
-const ImageComp: React.FC<ImageProps> = ({ className: styles }) => {
+const ImageComp: React.FC<ImageProps> = ({
+  className: styles,
+  imageStyles,
+}) => {
   return (
     <div className={styles}>
-      <Image src="/imagePlaceholder.png" fill alt="ImagePlaceholder" />
+      <Image
+        src="/artWorkshopTestPic.jpg"
+        fill
+        alt="ImagePlaceholder"
+        className={imageStyles}
+      />
     </div>
   );
 };
