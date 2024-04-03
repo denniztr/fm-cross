@@ -1,7 +1,7 @@
 import AddEventForm from '@/components/event/AddEventForm';
 import Tips from '@/components/Tips';
 
-export default function Home() {
+export default async function Home() {
   return (
     <main className="pt-16">
       <section className="flex gap-4">

@@ -12,7 +12,7 @@ const ImageComp: React.FC<ImageProps> = ({
   return (
     <div className={styles}>
       <Image
-        src="/artWorkshopTestPic.jpg"
+        src="/Placeholder_view_vector.svg.png"
         fill
         alt="ImagePlaceholder"
         className={imageStyles}

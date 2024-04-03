@@ -1,4 +1,5 @@
 import getEventById from '@/app/actions/getEventById';
+import getCurrentUser from '@/app/actions/getCurrentUser';
 
 import ImageComp from '@/components/Image';
 import { Button } from '@/components/ui/button';
@@ -9,8 +10,8 @@ export default async function Home({
   params: { id: string };
 }) {
   const event = await getEventById(id);
+  const currentUser = await getCurrentUser();
 
-  
   return (
     <main className="pt-6">
       <section className="flex flex-col gap-4">
@@ -62,8 +63,17 @@ export default async function Home({
               />
             </div>
             <div className="leading-7">
-              <h3 className="py-5 font-semibold text-xl">О мероприятии</h3>
-              <p>{event?.description}</p>
+              <div className="py-5 flex items-center space-x-3">
+                <h3 className="font-semibold text-xl">О мероприятии</h3>
+                {currentUser?.id === event?.author.id && (
+                  <p className="text-sm underline-offset-4 cursor-pointer hover:underline inline">
+                    редактировать
+                  </p>
+                )}
+              </div>
+              <div>
+                <p>{event?.description}</p>
+              </div>
             </div>
             <div>
               <h3 className="py-5 font-semibold text-xl">

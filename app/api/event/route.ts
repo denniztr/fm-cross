@@ -15,13 +15,12 @@ export async function POST(request: Request) {
       startDate,
       startTime,
       title,
-      //media,
+      media,
     } = body;
 
     if (!currentUser?.id || !currentUser?.email) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
-
 
     const event = await prisma.event.create({
       data: {
@@ -32,7 +31,7 @@ export async function POST(request: Request) {
         startTime,
         eventType,
         category,
-       // media,
+        media,
         author: {
           connect: {
             id: currentUser.id,
