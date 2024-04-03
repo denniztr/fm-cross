@@ -42,7 +42,7 @@ export default async function Home() {
       </section>
       <section className="pt-20">
         <h2 className="font-semibold text-2xl">Предстоящие мероприятия</h2>
-        <div className="pt-10 flex gap-3">
+        <div className="pt-10 flex flex-wrap gap-3">
           {allEvents?.map((event) => (
             <EventCard key={event.id} {...event} />
           ))}
