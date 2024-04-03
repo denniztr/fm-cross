@@ -10,6 +10,7 @@ export default async function Home({
 }) {
   const event = await getEventById(id);
 
+  
   return (
     <main className="pt-6">
       <section className="flex flex-col gap-4">
