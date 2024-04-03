@@ -51,11 +51,12 @@ const AddEventForm = () => {
       startTime: '',
       eventType: '',
       category: '',
+      // media: '',
     },
   });
 
   const onSubmit = (data: z.infer<typeof AddEventSchema>) => {
-    // console.log(data);
+    console.log(data);
     setIsLoading(true);
     axios
       .post('/api/event', data)
@@ -204,7 +205,7 @@ const AddEventForm = () => {
                 <FormItem>
                   <h3 className="font-semibold">Место проведения</h3>
                   <FormControl>
-                    <Input {...field} placeholder="Локация"                         disabled={isLoading}/>
+                    <Input {...field} placeholder="Локация" disabled={isLoading}/>
                   </FormControl>
                   <FormDescription>
                     Напишите полный адрес или оставьте ссылку если мероприятие
@@ -214,6 +215,22 @@ const AddEventForm = () => {
                 </FormItem>
               )}
             />
+              {/* <FormField
+              control={form.control}
+              name="media"
+              render={({ field }) => (
+                <FormItem>
+                  <h3 className="font-semibold">Фотография</h3>
+                  <FormControl>
+                    <Input {...field} type="file" disabled={isLoading}/>
+                  </FormControl>
+                  <FormDescription>
+                    Эта фотография будет отображаться как основная фотография мероприятия
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            /> */}
             <FormField
               control={form.control}
               name="description"

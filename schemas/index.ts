@@ -48,4 +48,5 @@ export const AddEventSchema = z.object({
   eventType: z.string().min(1, {
     message: 'Заполните поле'
   }),
+  // media: z.string()
 });
