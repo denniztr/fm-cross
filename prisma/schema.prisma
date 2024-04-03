@@ -56,7 +56,7 @@ model Event {
   startDate   String
   startTime   String
   category    String
-  // media        String
+  media       String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   // participants EventUser[]

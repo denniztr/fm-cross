@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import getAllEvents from '@/app/actions/getAllEvents';
 
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useGetCategoryRoutes from '@/app/_hooks/useCategoryRoutes';
 
@@ -35,10 +36,16 @@ import { Textarea } from '../ui/textarea';
 import { Button } from '../ui/button';
 
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
+
+import { CldUploadButton } from 'next-cloudinary';
 
 const AddEventForm = () => {
   const { toast } = useToast();
+  const router = useRouter();
+
   const category = useGetCategoryRoutes();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof AddEventSchema>>({
@@ -51,13 +58,13 @@ const AddEventForm = () => {
       startTime: '',
       eventType: '',
       category: '',
-      // media: '',
+      media: '',
     },
   });
 
   const onSubmit = (data: z.infer<typeof AddEventSchema>) => {
-    console.log(data);
     setIsLoading(true);
+    console.log(data)
     axios
       .post('/api/event', data)
       .then((cb) => {
@@ -71,7 +78,8 @@ const AddEventForm = () => {
         if (cb.status === 201) {
           toast({
             title: 'Поздравляем!',
-            description: 'Вы опубликовали новое мероприятие!',
+            description:
+              'Вы опубликовали новое мероприятие! Добавьте фотографии, чтобы ваше объяление выглядело лучше!',
           });
         }
       })
@@ -179,7 +187,7 @@ const AddEventForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input {...field} type="date"                         disabled={isLoading}/>
+                        <Input {...field} type="date" disabled={isLoading} />
                       </FormControl>
                     </FormItem>
                   )}
@@ -191,7 +199,7 @@ const AddEventForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input {...field} type="time"                         disabled={isLoading}/>
+                        <Input {...field} type="time" disabled={isLoading} />
                       </FormControl>
                     </FormItem>
                   )}
@@ -205,7 +213,11 @@ const AddEventForm = () => {
                 <FormItem>
                   <h3 className="font-semibold">Место проведения</h3>
                   <FormControl>
-                    <Input {...field} placeholder="Локация" disabled={isLoading}/>
+                    <Input
+                      {...field}
+                      placeholder="Локация"
+                      disabled={isLoading}
+                    />
                   </FormControl>
                   <FormDescription>
                     Напишите полный адрес или оставьте ссылку если мероприятие
@@ -215,22 +227,6 @@ const AddEventForm = () => {
                 </FormItem>
               )}
             />
-              {/* <FormField
-              control={form.control}
-              name="media"
-              render={({ field }) => (
-                <FormItem>
-                  <h3 className="font-semibold">Фотография</h3>
-                  <FormControl>
-                    <Input {...field} type="file" disabled={isLoading}/>
-                  </FormControl>
-                  <FormDescription>
-                    Эта фотография будет отображаться как основная фотография мероприятия
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
             <FormField
               control={form.control}
               name="description"

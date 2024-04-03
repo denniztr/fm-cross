@@ -1,7 +1,12 @@
 import AddEventForm from '@/components/event/AddEventForm';
 import Tips from '@/components/Tips';
+import getAllEvents from '@/app/actions/getAllEvents';
 
-export default function Home() {
+export default async function Home() {
+
+  const events = await getAllEvents();
+  console.log(events)
+
   return (
     <main className="pt-16">
       <section className="flex gap-4">
