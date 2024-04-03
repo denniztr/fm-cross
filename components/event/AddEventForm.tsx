@@ -43,7 +43,7 @@ import { CldUploadButton } from 'next-cloudinary';
 const AddEventForm = () => {
   const { toast } = useToast();
   const router = useRouter();
-  console.log(router);
+
   const category = useGetCategoryRoutes();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -64,32 +64,33 @@ const AddEventForm = () => {
 
   const onSubmit = (data: z.infer<typeof AddEventSchema>) => {
     setIsLoading(true);
-    // axios
-    //   .post('/api/event', data)
-    //   .then((cb) => {
-    //     if (cb.status !== 201) {
-    //       toast({
-    //         title: 'Ошибка!',
-    //         description: 'Что-то пошло не так!',
-    //       });
-    //     }
+    console.log(data)
+    axios
+      .post('/api/event', data)
+      .then((cb) => {
+        if (cb.status !== 201) {
+          toast({
+            title: 'Ошибка!',
+            description: 'Что-то пошло не так!',
+          });
+        }
 
-    //     if (cb.status === 201) {
-    //       toast({
-    //         title: 'Поздравляем!',
-    //         description:
-    //           'Вы опубликовали новое мероприятие! Добавьте фотографии, чтобы ваше объяление выглядело лучше!',
-    //       });
-    //     }
-    //   })
-    //   .catch(() => {
-    //     toast({
-    //       title: 'Ошибка',
-    //       description: 'Что-то пошло не так!',
-    //       variant: 'destructive',
-    //     });
-    //   })
-    //   .finally(() => setIsLoading(false));
+        if (cb.status === 201) {
+          toast({
+            title: 'Поздравляем!',
+            description:
+              'Вы опубликовали новое мероприятие! Добавьте фотографии, чтобы ваше объяление выглядело лучше!',
+          });
+        }
+      })
+      .catch(() => {
+        toast({
+          title: 'Ошибка',
+          description: 'Что-то пошло не так!',
+          variant: 'destructive',
+        });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -221,24 +222,6 @@ const AddEventForm = () => {
                   <FormDescription>
                     Напишите полный адрес или оставьте ссылку если мероприятие
                     онлайн
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="media"
-              render={({ field }) => (
-                <FormItem>
-                  <h3 className="font-semibold">Загрузите фотографию</h3>
-                  <FormControl>
-                    <CldUploadButton options={{ maxFiles: 1 }} uploadPreset="wv9ttvmp">
-                      <Input {...field} type="file" placeholder="Фотография" />
-                    </CldUploadButton>
-                  </FormControl>
-                  <FormDescription>
-                    Эта фотография будет отображаться в заголовке мероприятия
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
