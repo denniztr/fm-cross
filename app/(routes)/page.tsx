@@ -15,6 +15,7 @@ export default async function Home() {
   const currentUser = await getCurrentUser();
   const allEvents = await getAllEvents();
 
+
   return (
     <main className="container">
       <section className="py-6 lg:py-0 lg:flex lg:justify-evenly lg:flex-row lg:flex-wrap lg:items-center">
