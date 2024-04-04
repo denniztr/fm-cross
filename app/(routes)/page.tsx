@@ -28,6 +28,9 @@ export default async function Home() {
             людей, которые разделяют их. Мероприятия проводятся каждый день —
             зарегистрируйтесь и присоединяйтесь!
           </p>
+          <div className="w-full md:px-32 lg:hidden">
+            <Input placeholder="Поиск мероприятий" />
+          </div>
           <div className="flex justify-center items-center lg:block">
             {currentUser ? (
               <LoginButton href="/events">Найти мероприятие</LoginButton>
@@ -36,16 +39,23 @@ export default async function Home() {
             )}
           </div>
         </div>
-        <div className="hidden lg:block relative w-[500px] h-[500px]">
+        <div className="hidden relative lg:w-[250px] lg:h-[250px]">
           <Image src="/dayflow.svg" fill alt="FrontImage" />
         </div>
       </section>
-      <section>
-        <h2 className="font-semibold text-2xl">Популярные категории</h2>
+      <section className="py-10 space-y-10">
+        <h2 className="font-semibold text-xl lg:text-2xl">
+          Популярные категории
+        </h2>
         <Categories />
+        <p className="text-center underline-offset-4 hover:underline cursor-pointer">
+          Посмотреть все категории
+        </p>
       </section>
-      <section className="pt-20">
-        <h2 className="font-semibold text-2xl">Предстоящие мероприятия</h2>
+      <section>
+        <h2 className="font-semibold text-xl lg:text-2xl">
+          Предстоящие мероприятия
+        </h2>
         <div className="pt-10 flex flex-wrap justify-center gap-6">
           {allEvents?.map((event) => (
             <EventCard key={event.id} {...event} />

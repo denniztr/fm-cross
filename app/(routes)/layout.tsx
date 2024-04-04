@@ -12,7 +12,7 @@ export default async function Layout({
     <div className="">
       {/* пофиксить ошибку тс */}
       <Header currentUser={currentUser!} className="hidden lg:block" />
-      <div className="container bg-black/10">{children}</div>
+      <div className="container ">{children}</div>
       <Footer />
     </div>
   );
