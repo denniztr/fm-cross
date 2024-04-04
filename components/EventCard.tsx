@@ -41,15 +41,10 @@ const EventCard: React.FC<EventCardProps> = ({
   });
 
   return (
-    <Card className="w-[420px] transition duration-200 hover:shadow-lg">
+    <Card className="max-w-[420px] transition duration-200 hover:shadow-lg">
       <CardContent className="px-0">
-        <div className="w-full h-64 relative">
-          <Image
-            src="/art.jpg"
-            fill
-            alt="cardImage"
-            className="object-fit rounded-t-xl"
-          />
+        <div className="w-full h-64 relative inline-block overflow-hidden rounded-t-xl">
+          <Image src="/testPictureEnglishClub.jpg" fill alt="cardImage" />
         </div>
         <CardHeader>
           <CardTitle>{title}</CardTitle>

@@ -7,6 +7,7 @@ import LoginButton from '@/components/LoginButton';
 import Categories from '@/components/category/Categories';
 import EventCard from '@/components/EventCard';
 import ArticleCard from '@/components/ArticleCard';
+import SortButtons from '@/components/SortButtons';
 
 import { Input } from '@/components/ui/input';
 
@@ -48,15 +49,20 @@ export default async function Home() {
           Популярные категории
         </h2>
         <Categories />
-        <p className="text-center underline-offset-4 hover:underline cursor-pointer">
-          Посмотреть все категории
-        </p>
+        <div className="flex justify-center items-center">
+          <p className="underline-offset-4 hover:underline cursor-pointer">
+            Посмотреть все категории
+          </p>
+        </div>
       </section>
       <section>
         <h2 className="font-semibold text-xl lg:text-2xl">
           Предстоящие мероприятия
         </h2>
-        <div className="pt-10 flex flex-wrap justify-between gap-2 gap-y-2">
+        <div className="w-full my-6 border-b">
+          <SortButtons />
+        </div>
+        <div className="flex flex-wrap justify-between">
           {allEvents?.map((event) => (
             <EventCard key={event.id} {...event} />
           ))}

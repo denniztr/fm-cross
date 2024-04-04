@@ -13,13 +13,12 @@ export default async function Home({
   const currentUser = await getCurrentUser();
 
   return (
-    <main className="pt-6">
+    <main className="container py-10">
       <section className="flex flex-col gap-4">
         <div className="p-6 rounded-xl border bg-card text-card-foreground shadow">
           <div className="flex gap-4">
             <ImageComp
-              className="relative h-28 w-32"
-              imageStyles="object-cover"
+              className="relative h-28 w-32 inline-block overflow-hidden"
             />
             <div className="flex justify-between w-full">
               <div>
@@ -59,7 +58,6 @@ export default async function Home({
             <div className="bg-black/5">
               <ImageComp
                 className="relative w-full h-[450px]"
-                imageStyles="object-contain"
               />
             </div>
             <div className="leading-7">
