@@ -8,31 +8,35 @@ import Categories from '@/components/category/Categories';
 import EventCard from '@/components/EventCard';
 import ArticleCard from '@/components/ArticleCard';
 
+import { Input } from '@/components/ui/input';
+
 export default async function Home() {
   const currentUser = await getCurrentUser();
   const allEvents = await getAllEvents();
 
   return (
     <main className="h-full">
-      <section className="flex flex-row flex-wrap items-center">
-        <div className="w-1/2 space-y-8">
-          <h1 className="font-semibold text-4xl">
+      <section className="py-6 lg:py-0 lg:flex lg:flex-row lg:flex-wrap lg:items-center">
+        <div className="space-y-8 lg:w-1/2">
+          <h1 className="font-semibold px-12 text-center text-xl  md:px-8 md:text-2xl lg:px-0 lg:text-4xl lg:text-left">
             Платформа для людей, где с общих интересов начинается дружба
           </h1>
-          <p className="leading-7 pb-8">
+          <p className="leading-7 text-center lg:text-left">
             Какие бы ни были у вас интересы, от туризма и чтения до общения и
             желания поделиться своими умениями, вы всегда найдете в{' '}
             <span className="text-testColor font-bold">МестоВстречи</span>{' '}
             людей, которые разделяют их. Мероприятия проводятся каждый день —
             зарегистрируйтесь и присоединяйтесь!
           </p>
-          {currentUser ? (
-            <LoginButton href="/events">Найти мероприятие</LoginButton>
-          ) : (
-            <LoginButton href="/signup">Присоединиться</LoginButton>
-          )}
+          <div className="flex justify-center items-center lg:block">
+            {currentUser ? (
+              <LoginButton href="/events">Найти мероприятие</LoginButton>
+            ) : (
+              <LoginButton href="/signup">Присоединиться</LoginButton>
+            )}
+          </div>
         </div>
-        <div className="relative w-[500px] h-[500px]">
+        <div className="hidden lg:block relative w-[500px] h-[500px]">
           <Image src="/dayflow.svg" fill alt="FrontImage" />
         </div>
       </section>

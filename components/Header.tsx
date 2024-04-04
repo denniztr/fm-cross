@@ -9,9 +9,10 @@ import SearchInput from './SearchInput';
 
 interface HeaderProps {
   currentUser: User;
+  className: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ currentUser }) => {
+const Header: React.FC<HeaderProps> = ({ currentUser, className }) => {
   return (
     <header className="w-full py-3 px-8 2xl:px-36">
       <div className="flex justify-between">
@@ -20,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
             <h1 className="text-2xl font-bold cursor-pointer">МестоВстречи</h1>
           </Link>
           <div className="hidden lg:block">
-            <SearchInput />
+            <SearchInput className={className} />
           </div>
         </div>
         <div className="flex flex-row items-center gap-2">
