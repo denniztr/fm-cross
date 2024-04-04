@@ -56,7 +56,7 @@ export default async function Home() {
         <h2 className="font-semibold text-xl lg:text-2xl">
           Предстоящие мероприятия
         </h2>
-        <div className="pt-10 flex flex-wrap justify-center gap-6">
+        <div className="pt-10 flex flex-wrap justify-between gap-2 gap-y-2">
           {allEvents?.map((event) => (
             <EventCard key={event.id} {...event} />
           ))}

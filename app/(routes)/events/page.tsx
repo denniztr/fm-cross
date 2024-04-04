@@ -26,7 +26,7 @@ export default async function Home() {
         <h2 className="pb-6 font-semibold text-xl lg:text-2xl">
           Все мероприятия
         </h2>
-        <div className="flex gap-4 flex-wrap">
+        <div className="flex flex-wrap justify-between gap-2">
           {events?.map((event) => (
             <EventCard key={event.id} {...event} />
           ))}

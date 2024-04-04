@@ -11,7 +11,9 @@ import {
 import Image from 'next/image';
 import { Button } from './ui/button';
 import Link from 'next/link';
-import React from 'react';
+
+import { format, parseISO } from 'date-fns';
+import ru from 'date-fns/locale/ru';
 
 interface EventCardProps {
   id: string;
@@ -34,47 +36,36 @@ const EventCard: React.FC<EventCardProps> = ({
   category,
   author,
 }) => {
+  const formattedDate = format(parseISO(startDate), 'dd MMMM yyyy', {
+    locale: ru,
+  });
+
   return (
-    <Card className="w-[300px] transition duration-200 hover:shadow-lg">
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription className="h-16 overflow-hidden text-sm">
-          {description}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
+    <Card className="w-[420px] transition duration-200 hover:shadow-lg">
+      <CardContent className="px-0">
         <div className="w-full h-64 relative">
           <Image
             src="/art.jpg"
             fill
             alt="cardImage"
-            className="object-center"
+            className="object-fit rounded-t-xl"
           />
         </div>
-        <div className=" text-gray-600 text-sm pt-3 space-y-3">
+        <CardHeader>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{location}</CardDescription>
+        </CardHeader>
+        <CardFooter>
+          <div className="w-48">{formattedDate}</div>
           <div>
-            <p>Бесплатно</p>
+            <Link href={`/events/${id}`} className="w-full">
+              <Button className="font-normal" variant="default">
+                Подробнее
+              </Button>
+            </Link>
           </div>
-          <div className="space-y-4 font-semibold">
-            <p>
-              Начало:{' '}
-              <span className="font-normal">
-                {startDate}, {startTime}
-              </span>
-            </p>
-            <p>
-              Место проведения: <span className="font-normal">{location}</span>
-            </p>
-          </div>
-        </div>
+        </CardFooter>
       </CardContent>
-      <CardFooter>
-        <Link href={`/events/${id}`} className="w-full">
-          <Button className="w-full font-normal" variant="default">
-            Подробнее
-          </Button>
-        </Link>
-      </CardFooter>
     </Card>
   );
 };
