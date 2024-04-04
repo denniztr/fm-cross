@@ -18,8 +18,10 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ image, href, label }) => {
           inline-block 
           rounded-full 
           overflow-hidden 
-          h-32 
-          w-32 
+          h-28
+          w-28
+          md:h-40
+          md:w-40 
           cursor-pointer
           "
       >

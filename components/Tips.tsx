@@ -1,6 +1,6 @@
 const Tips = () => {
   return (
-    <ul className="text-sm space-y-4 py-4 leading-6">
+    <ul className="text-sm space-y-4 py-4 leading-5">
       <li>
         <span className="font-semibold">Ясное и краткое название:</span>{' '}
         Сформулируйте название мероприятия так, чтобы оно ясно отражало его суть
