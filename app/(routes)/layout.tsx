@@ -9,11 +9,10 @@ export default async function Layout({
 }) {
   const currentUser = await getCurrentUser();
   return (
-    <div className="">
+    <div>
       {/* пофиксить ошибку тс */}
       <Header currentUser={currentUser!} className="hidden lg:block" />
-      <div className="container ">{children}</div>
-      <Footer />
+      <div>{children}</div>
     </div>
   );
 }

@@ -14,7 +14,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ currentUser, className }) => {
   return (
-    <header className="w-full py-3 px-8 2xl:px-36">
+    <header className="w-full py-3 px-8 2xl:px-28">
       <div className="flex justify-between">
         <div className="flex items-center gap-4">
           <Link href="/">

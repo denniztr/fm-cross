@@ -15,8 +15,8 @@ export default async function Home() {
   const allEvents = await getAllEvents();
 
   return (
-    <main className="h-full">
-      <section className="py-6 lg:py-0 lg:flex lg:flex-row lg:flex-wrap lg:items-center">
+    <main className="container">
+      <section className="py-6 lg:py-0 lg:flex lg:justify-evenly lg:flex-row lg:flex-wrap lg:items-center">
         <div className="space-y-8 lg:w-1/2">
           <h1 className="font-semibold px-12 text-center text-xl  md:px-8 md:text-2xl lg:px-0 lg:text-4xl lg:text-left">
             Платформа для людей, где с общих интересов начинается дружба
@@ -39,7 +39,7 @@ export default async function Home() {
             )}
           </div>
         </div>
-        <div className="hidden relative lg:w-[250px] lg:h-[250px]">
+        <div className="hidden relative lg:block lg:w-[450px] lg:h-[450px]">
           <Image src="/dayflow.svg" fill alt="FrontImage" />
         </div>
       </section>
@@ -72,9 +72,7 @@ export default async function Home() {
         <h2 className="font-semibold text-2xl">
           <span className="">Логотип</span> - это место где начинается дружба!
         </h2>
-        <div className="pt-10 flex gap-3">
-          <ArticleCard />
-          <ArticleCard />
+        <div className="pt-10 flex gap-3 flex-wrap">
           <ArticleCard />
         </div>
       </section>

@@ -20,8 +20,8 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ image, href, label }) => {
           overflow-hidden 
           h-28
           w-28
-          lg:h-40
-          lg:w-40 
+          md:h-40
+          md:w-40 
           cursor-pointer
           "
       >

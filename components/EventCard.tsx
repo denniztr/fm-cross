@@ -52,19 +52,10 @@ const EventCard: React.FC<EventCardProps> = ({
           />
         </div>
         <div className=" text-gray-600 text-sm pt-3 space-y-3">
-          <div className="flex justify-between">
-            <p>
-              Участники: <span>0</span>
-            </p>
+          <div>
             <p>Бесплатно</p>
           </div>
           <div className="space-y-4 font-semibold">
-            <p>
-              Организатор:{' '}
-              <span className="ml-1 font-normal cursor-pointer underline-offset-4 hover:underline">
-                {author?.name} {author?.surname}
-              </span>
-            </p>
             <p>
               Начало:{' '}
               <span className="font-normal">
@@ -74,18 +65,12 @@ const EventCard: React.FC<EventCardProps> = ({
             <p>
               Место проведения: <span className="font-normal">{location}</span>
             </p>
-            <p>
-              Категория: <span className="font-normal">{category}</span>
-            </p>
           </div>
         </div>
       </CardContent>
       <CardFooter>
         <Link href={`/events/${id}`} className="w-full">
-          <Button
-            className="w-full font-normal bg-testColor hover:bg-hoverTestColor"
-            variant="default"
-          >
+          <Button className="w-full font-normal" variant="default">
             Подробнее
           </Button>
         </Link>
