@@ -7,11 +7,14 @@ export default async function Home() {
   return (
     <main>
       Поиск, сортировка и список всех мероприятий на этой странице
-      <div className="flex gap-3">
-        {events?.map((event) => (
-          <EventCard key={event.id} {...event} />
-        ))}
-      </div>
+      <section className="pt-10">
+        <h1 className="font-semibold text-2xl">Все мероприятия</h1>
+        <div className="flex gap-4 pt-10">
+          {events?.map((event) => (
+            <EventCard key={event.id} {...event} />
+          ))}
+        </div>
+      </section>
     </main>
   );
 }

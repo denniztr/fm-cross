@@ -86,7 +86,7 @@ const EventCard: React.FC<EventCardProps> = ({
             className="w-full font-normal bg-testColor hover:bg-hoverTestColor"
             variant="default"
           >
-            Принять участие
+            Подробнее
           </Button>
         </Link>
       </CardFooter>

@@ -36,7 +36,7 @@ export default async function Home() {
           <Image src="/dayflow.svg" fill alt="FrontImage" />
         </div>
       </section>
-      <section className="">
+      <section>
         <h2 className="font-semibold text-2xl">Популярные категории</h2>
         <Categories />
       </section>
