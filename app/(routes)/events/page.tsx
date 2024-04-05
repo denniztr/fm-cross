@@ -4,7 +4,6 @@ import getFilteredEvents from '@/app/actions/getFilteredEvents';
 import EventCard from '@/components/EventCard';
 import SearchEvents from '@/components/SearchEvents';
 
-
 export default async function Home({
   searchParams,
 }: {
@@ -14,12 +13,12 @@ export default async function Home({
   };
 }) {
   const query = searchParams?.query || '';
-  const events = await getAllEvents();
+  const events = await getAllEvents(query);
+  // const filteredEvents = await getFilteredEvents(query);
+  // if (query) {
 
-  if (query) {
-    const filteredEvents = await getFilteredEvents(query);
-    // console.log(filteredEvents)
-  }
+  //   // console.log(filteredEvents)
+  // }
 
   return (
     <main>
