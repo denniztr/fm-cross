@@ -27,7 +27,7 @@ const translate = (str: string) => {
     return 'Дети';
   }
 
-  return null
+  return ''
 };
 
 export default translate;
