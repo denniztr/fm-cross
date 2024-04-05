@@ -11,9 +11,12 @@ import SortButtons from '@/components/SortButtons';
 
 import { Input } from '@/components/ui/input';
 
+
 export default async function Home() {
+
   const currentUser = await getCurrentUser();
   const allEvents = await getAllEvents();
+
 
   return (
     <main className="container">

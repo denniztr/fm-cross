@@ -40,6 +40,8 @@ const EventCard: React.FC<EventCardProps> = ({
     locale: ru,
   });
   // width 429px
+
+
   return (
     <div className="min-w-[300px]">
       <Card className="w-full transition duration-200 hover:shadow-lg">

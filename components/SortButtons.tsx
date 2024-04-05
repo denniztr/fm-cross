@@ -106,11 +106,15 @@ const SortButtons = () => {
       const day = today.getDay();
       const firstDay = today.getDate() - day + 1;
 
+      const currentMonth = today.getMonth() + 1;
+
 
       startOfMonth.setDate(firstDay);
       startOfMonth.setHours(0, 0, 0, 0);
 
+
       console.log('Текущий месяц начался в: ' + startOfMonth);
+      console.log('Последний день месяца: ' + endOfMonth);
       console.log('------------------------------');
     }
   };
