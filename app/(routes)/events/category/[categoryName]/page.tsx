@@ -23,9 +23,11 @@ export default async function Home({
           </div>
         </div>
       </section>
-      <section className='container py-10'>
+      <section className="container py-10">
         <div>
-          <h1 className="font-semibold text-2xl">{translate(categoryName)}</h1>
+          <h1 className="pb-6 font-semibold text-2xl">
+            {translate(categoryName)}
+          </h1>
         </div>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
           {events?.map((event) => (
