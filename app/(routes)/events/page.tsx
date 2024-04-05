@@ -1,11 +1,25 @@
 import getAllEvents from '@/app/actions/getAllEvents';
+import getFilteredEvents from '@/app/actions/getFilteredEvents';
+
 import EventCard from '@/components/EventCard';
-import { Button } from '@/components/ui/button';
+import SearchEvents from '@/components/SearchEvents';
 
-import { Input } from '@/components/ui/input';
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: {
+    query?: string;
+    page?: string;
+  };
+}) {
+  const query = searchParams?.query || '';
   const events = await getAllEvents();
+
+  if (query) {
+    const filteredEvents = await getFilteredEvents(query);
+    // console.log(filteredEvents)
+  }
 
   return (
     <main>
@@ -14,11 +28,12 @@ export default async function Home() {
           <h1 className="font-semibold text-2xl text-center text-white">
             Поиск мероприятия
           </h1>
-          <div className="mx-auto max-w-[800px] flex gap-2 px-10 lg:px-0">
-            <Input placeholder="Поиск мероприятия" className="bg-white/90" />
+          <div className="mx-auto max-w-[800px] px-10 lg:px-0">
+            <SearchEvents />
+            {/* <Input placeholder="Поиск мероприятия" className="bg-white/90" />
             <Button className="bg-white text-black hover:bg-white">
               Поиск
-            </Button>
+            </Button> */}
           </div>
         </div>
       </section>
