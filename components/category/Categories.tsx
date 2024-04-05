@@ -9,7 +9,7 @@ const Categories = () => {
   const limitedCategoryRoutes = categoryRoutes.slice(0, 5);
 
   return (
-    <div className="flex justify-around flex-wrap">
+    <div className="min-w-[820px] overflow-auto flex justify-around">
       {limitedCategoryRoutes.map((category) => (
         <CategoryItem
           key={category.label}

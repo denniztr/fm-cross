@@ -44,11 +44,13 @@ export default async function Home() {
           <Image src="/dayflow.svg" fill alt="FrontImage" />
         </div>
       </section>
-      <section className="py-10 space-y-10">
+      <section className="w-full py-10 space-y-10">
         <h2 className="font-semibold text-xl lg:text-2xl">
           Популярные категории
         </h2>
+        <div className='overflow-auto'>
         <Categories />
+        </div>
         <div className="flex justify-center items-center">
           <p className="underline-offset-4 hover:underline cursor-pointer">
             Посмотреть все категории
