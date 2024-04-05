@@ -15,7 +15,6 @@ export default async function Home() {
   const currentUser = await getCurrentUser();
   const allEvents = await getAllEvents();
 
-
   return (
     <main className="container">
       <section className="py-6 lg:py-0 lg:flex lg:justify-evenly lg:flex-row lg:flex-wrap lg:items-center">
@@ -60,7 +59,7 @@ export default async function Home() {
         <h2 className="font-semibold text-xl lg:text-2xl">
           Предстоящие мероприятия
         </h2>
-        <div className="w-full my-6 border-b">
+        <div className="w-full overflow-auto my-6 border-b">
           <SortButtons />
         </div>
         <div className="flex flex-wrap justify-between">
