@@ -14,7 +14,7 @@ type variant =
   | 'THIS MONTH';
 
 const SortButtons = () => {
-  const [variant, setVariant] = useState('ALL');
+  const [variant, setVariant] = useState('TODAY');
 
   return (
     <div className="min-w-[820px] overflow-auto flex flex-row justify-between pb-2 text-gray-500">

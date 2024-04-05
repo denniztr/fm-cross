@@ -1,6 +1,6 @@
 import prisma from '@/app/libs/prismadb';
 
-export default async function getAllEvents(query: string) {
+export default async function getAllEvents(query: string, categoryName: string) {
   try {
     const events = await prisma.event.findMany({
       include: {
@@ -15,6 +15,9 @@ export default async function getAllEvents(query: string) {
             contains: query,
           },
         },
+        include: {
+          author: true,
+        }
       });
       return event
     }

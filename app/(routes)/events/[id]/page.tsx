@@ -97,6 +97,12 @@ export default async function Home({
                 </div>
               </div>
               <div className="space-y-1">
+                <h5 className="font-semibold">Категория</h5>
+                <div>
+                  <p className="text-sm text-gray-500">{event?.category}</p>
+                </div>
+              </div>
+              <div className="space-y-1">
                 <h5 className="font-semibold">Поделиться ссылкой</h5>
                 <div>
                   <p>ссылка</p>

@@ -48,8 +48,8 @@ export default async function Home() {
         <h2 className="font-semibold text-xl lg:text-2xl">
           Популярные категории
         </h2>
-        <div className='overflow-auto'>
-        <Categories />
+        <div className="overflow-auto">
+          <Categories />
         </div>
         <div className="flex justify-center items-center">
           <p className="underline-offset-4 hover:underline cursor-pointer">

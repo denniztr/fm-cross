@@ -23,7 +23,6 @@ const SearchEvents = () => {
     replace(`${pathname}?${params.toString()}`);
   }
 
-
   return (
       <div className="w-full flex gap-2">
         <label htmlFor="search" className="sr-only">

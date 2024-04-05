@@ -1,8 +1,8 @@
 import getAllEvents from '@/app/actions/getAllEvents';
-import getFilteredEvents from '@/app/actions/getFilteredEvents';
 
 import EventCard from '@/components/EventCard';
 import SearchEvents from '@/components/SearchEvents';
+
 
 export default async function Home({
   searchParams,
@@ -14,11 +14,7 @@ export default async function Home({
 }) {
   const query = searchParams?.query || '';
   const events = await getAllEvents(query);
-  // const filteredEvents = await getFilteredEvents(query);
-  // if (query) {
 
-  //   // console.log(filteredEvents)
-  // }
 
   return (
     <main>
@@ -29,10 +25,6 @@ export default async function Home({
           </h1>
           <div className="mx-auto max-w-[800px] px-10 lg:px-0">
             <SearchEvents />
-            {/* <Input placeholder="Поиск мероприятия" className="bg-white/90" />
-            <Button className="bg-white text-black hover:bg-white">
-              Поиск
-            </Button> */}
           </div>
         </div>
       </section>
