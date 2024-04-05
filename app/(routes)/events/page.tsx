@@ -26,7 +26,7 @@ export default async function Home() {
         <h2 className="pb-6 font-semibold text-xl lg:text-2xl">
           Все мероприятия
         </h2>
-        <div className="flex flex-wrap gap-6">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
           {events?.map((event) => (
             <EventCard key={event.id} {...event} />
           ))}

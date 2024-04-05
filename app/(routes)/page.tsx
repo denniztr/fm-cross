@@ -62,7 +62,7 @@ export default async function Home() {
         <div className="w-full overflow-auto my-6 border-b">
           <SortButtons />
         </div>
-        <div className="flex flex-wrap justify-between">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4">
           {allEvents?.map((event) => (
             <EventCard key={event.id} {...event} />
           ))}

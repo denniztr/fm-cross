@@ -39,29 +39,31 @@ const EventCard: React.FC<EventCardProps> = ({
   const formattedDate = format(parseISO(startDate), 'dd MMMM yyyy', {
     locale: ru,
   });
-
+  // width 429px
   return (
-    <Card className="max-w-[420px] transition duration-200 hover:shadow-lg">
-      <CardContent className="px-0">
-        <div className="w-full h-64 relative inline-block overflow-hidden rounded-t-xl">
-          <Image src="/testPictureEnglishClub.jpg" fill alt="cardImage" />
-        </div>
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-          <CardDescription>{location}</CardDescription>
-        </CardHeader>
-        <CardFooter>
-          <div className="w-48">{formattedDate}</div>
-          <div>
-            <Link href={`/events/${id}`} className="w-full">
-              <Button className="font-normal" variant="default">
-                Подробнее
-              </Button>
-            </Link>
+    <div className="min-w-[300px]">
+      <Card className="w-full transition duration-200 hover:shadow-lg">
+        <CardContent className="px-0">
+          <div className="w-full h-64 relative inline-block overflow-hidden rounded-t-xl">
+            <Image src="/testPictureEnglishClub.jpg" fill alt="cardImage" />
           </div>
-        </CardFooter>
-      </CardContent>
-    </Card>
+          <CardHeader>
+            <CardTitle>{title}</CardTitle>
+            <CardDescription>{location}</CardDescription>
+          </CardHeader>
+          <CardFooter>
+            <div className="w-48">{formattedDate}</div>
+            <div>
+              <Link href={`/events/${id}`} className="w-full">
+                <Button className="font-normal" variant="default">
+                  Подробнее
+                </Button>
+              </Link>
+            </div>
+          </CardFooter>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 
