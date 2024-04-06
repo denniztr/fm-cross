@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+
 interface CategoryItemProps {
   image: string;
   href: string;
@@ -10,6 +11,7 @@ interface CategoryItemProps {
 }
 
 const CategoryItem: React.FC<CategoryItemProps> = ({ image, href, label }) => {
+
   return (
     <div className="relative flex flex-col items-center space-y-3">
       <div

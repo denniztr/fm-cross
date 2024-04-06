@@ -5,7 +5,6 @@ export default async function Layout({
 }) {
   return (
     <div className="h-full">
-      <h3>Categories layout</h3>
       {children}
     </div>
   );
