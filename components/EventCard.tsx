@@ -39,7 +39,6 @@ const EventCard: React.FC<EventCardProps> = ({
   const formattedDate = format(parseISO(startDate), 'dd MMMM yyyy', {
     locale: ru,
   });
-  // width 429px
 
 
   return (
